@@ -178,7 +178,7 @@ nav a:hover:after {
 .hero-subtitle {
     font-size: 20px;
     color: var(--cera-white);
-    margin-top: 20px;
+    margin-top: 120px;
     margin-bottom: 60px;
     display: flex;
     align-items: center;
@@ -437,6 +437,97 @@ footer {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--texto-acentuado);
     font-size: 15px;
+}
+
+
+/*movil area section */
+
+@media (max-width: 768px) {
+    /* 1. Header: Apilamos logo y navegación verticalmente */
+    header {
+        padding: 15px 0;
+    }
+    .header-container {
+        flex-direction: column !important;
+        /* Logo arriba, Nav abajo */
+        gap: 15px;
+        text-align: center;
+    }
+    .logo {
+        justify-content: center;
+        width: 100%;
+    }
+    .logo-text {
+        font-size: 24px !important;
+        white-space: nowrap;
+        /* Mantiene "Happy Moments" en una línea */
+    }
+    /* 2. Menú de Navegación debajo del logo */
+    nav {
+        width: 100%;
+    }
+    nav ul {
+        flex-direction: row;
+        /* Mantenemos los links en fila */
+        justify-content: center;
+        flex-wrap: wrap;
+        /* Si son muchos, se pasan a otra línea */
+        gap: 15px;
+        padding: 0;
+    }
+    nav a {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+    .nav-buttons {
+        display: none;
+        /* Ocultamos el botón largo para ganar espacio */
+    }
+    /* 3. Ajuste de la Sección de Bienvenida (Hero) */
+    .hero {
+        height: auto;
+        padding: 160px 0 60px;
+        /* Aumentamos espacio superior por el header más alto */
+    }
+    .hero .container {
+        flex-direction: column !important;
+        align-items: center;
+        text-align: center;
+    }
+    .hero-content {
+        width: 100% !important;
+        padding: 0 20px;
+    }
+    .hero-title {
+        font-size: 28px !important;
+        line-height: 1.2;
+        margin-bottom: 20px;
+    }
+    .hero-subtitle {
+        justify-content: center;
+        font-size: 14px;
+    }
+    /* Imagen del sol/logo centrada abajo del texto */
+    .hero img {
+        width: 80% !important;
+        max-width: 280px;
+        height: auto;
+        margin-top: 30px;
+    }
+    /* 4. Catálogo: Una sola tarjeta por fila */
+    .product-grid {
+        grid-template-columns: 1fr !important;
+        padding: 0 10px;
+    }
+    /* 5. Footer Centrado */
+    .footer-content {
+        grid-template-columns: 1fr !important;
+        text-align: center;
+    }
+    .footer-column h3::after {
+        left: 50% !important;
+        transform: translateX(-50%);
+    }
 }
 
 
