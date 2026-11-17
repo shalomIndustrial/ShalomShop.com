@@ -3,526 +3,338 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summit Empresarial Mexico</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { 
-                        brandNavy: '#0A1931',
-                        brandNavyDark: '#050C1A',
-                        brandGold: '#C5A059',
-                        brandGoldHover: '#B28E46',
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Google Fonts -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ShalomIndustrial | Ceras para cítricos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Estilos propios -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="bg-gray-50 text-gray-800 antialiased">
+<body>
 
-    <!-- Navegación -->
-    <nav class="bg-white text-black sticky top-0 z-50 border-b border-brandGold/40 shadow-lg">
-        <div class="w-full pl-6 pr-3 md:pr-6 py-4 flex justify-between items-center">
-            <!-- Contenedor con ambas imágenes juntas horizontalmente -->
-            <div class="flex items-center space-x-4">
-                <img src="summit.PNG" alt="Summit Empresarial México" class="h-12 md:h-16 w-auto object-contain">
-                <img src="SUMMITBLANCO.jpeg" alt="Red Mundial de Jóvenes Políticos" class="h-10 md:h-12 w-auto object-contain">
-            </div>
-            <div class="space-x-5 lg:space-x-8 hidden md:flex font-medium text-sm text-black whitespace-nowrap">
-                <a href="#inicio" class="hover:text-brandGoldHover transition">INICIO</a>
-                <a href="#aliados" class="hover:text-brandGoldHover transition">A CERCA DE</a>
-                <a href="#que-hacemos" class="hover:text-brandGoldHover transition">CONFERENCISTAS</a>
-                <a href="#patrocinadores" class="hover:text-brandGoldHover transition">PATROCINADORES</a>
-                <a href="#agenda" class="hover:text-brandGoldHover transition">AGENDA</a>
-            </div>
-            <span class="bg-gray-300 text-gray-500 font-bold px-4 py-2 md:px-5 md:py-2.5 rounded-lg shadow-md text-xs md:text-sm whitespace-nowrap shrink-0 cursor-not-allowed opacity-70"
-                  aria-disabled="true">
-                COMPRA TUS BOLETOS AQUI!
-            </span>
+    <header class="site-header" id="site-header">
+        <div class="wrap nav-container">
+            <a href="#inicio" class="logo" aria-label="Shalom Industrial - Inicio">
+                <img src="logo.png" alt="Shalom Industrial" class="logo-img">
+            </a>
+
+            <!-- Botón de apertura para móviles -->
+            <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="primary-nav">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+
+            <!-- Menú de navegación principal -->
+            <nav class="nav-menu" id="primary-nav">
+                <ul class="nav-list">
+                    <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                    <li><a href="#productos" class="nav-link">Productos</a></li>
+                    <li><a href="#exportacion" class="nav-link">Exportación</a></li>
+                    <li>
+                        <a href="documentacion.html" class="nav-link nav-link-highlight">
+                            <span>Documentación</span>
+                            <span class="nav-badge">Portal</span>
+                        </a>
+                    </li>
+                    <li class="nav-cta-item">
+                        <a href="#contacto" class="btn btn-main btn-nav">Cotizar</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero / Encabezado Principal -->
-    <section id="inicio" class="bg-brandNavy text-white relative overflow-hidden py-20 px-6 border-b border-brandGold/20">
-        <div class="max-w-5xl mx-auto text-center relative z-10">
-            <!-- Banner / Imagen del lema integrado -->
-            <div class="mt-0 mb-4 max-w-3xl mx-auto bg-white/5 p-6 rounded-2xl border border-brandGold/30 backdrop-blur-sm shadow-xl">
-                <img src="cambio.jpeg" alt="El encuentro de la nueva generación empresarial más importante de México" class="w-full h-auto rounded-lg mx-auto">
-            </div>
-            <div class="text-center mt-12 mb-8">
-                <h2 class="text-4xl md:text-6xl font-semibold text-white" style="font-family: 'Playfair Display', serif;">
-                    Summit Empresarial
-                </h2>
+    <main id="inicio">
+        <!-- HERO -->
+        <div class="hero">
+            <div class="wrap hero-grid">
+                <div>
+                    <span class="eyebrow">Química para cítricos y piña</span>
+                    <h1>Cera para fruta que <em>protege</em> y da brillo de exportación</h1>
 
-            </div>
-            <p class="text-sm md:text-base text-gray-200 max-w-2xl mx-auto mt-3 leading-relaxed">
-                SUMMIT EMPRESARIAL MÉXICO es uno de los programas de formación de la RED MUNDIAL DE
-                 JÓVENES POLÍTICOS MÉXICO, enfocado en el ámbito empresarial. A través de un sistema 
-                 integral de innovación, desarrolla actividades concentradas en ponencias, talleres, 
-                 dinámicas, mentoría profesional, consultoría empresarial, incubación y desarrollo de
-                  proyectos, acercando a las juventudes a una primera experiencia empresarial y profesional.
-            </p>
-        </div>
-    </section>
+                    <p class="hero-lead">
+                        En <strong>ShalomIndustrial</strong> nos especializamos en el desarrollo, comercialización y exportación de productos de alta calidad para cítricos y piña. Sabemos que en el campo y en el empaque cada detalle cuenta: <em>una fruta bien cuidada se conserva mejor, luce mejor y se vende mejor</em>.
+                    </p>
 
-    <!-- Sección Aliados -->
-    <section id="que-hacemos" class="py-20 max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-brandNavy font-serif-title">Conferencistas Oficiales De Summit Empresarial</h2>
-            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Conoce a nuestros conferencistas que formaran parte del programa de la edicion de SUMMIT EMPRESARIAL NACIONAL!</p>
-        </div>
-
-        <!-- Galería de Aliados -->
-
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-
-            <div class="bg-white h-48 p-2 rounded-xl shadow-md border-t-4 border-brandGold flex items-center justify-center hover:-translate-y-1 transition">
-                <img src="invitado.png" alt="Aliado 1" class="w-full h-full object-contain">
-            </div>
-
-            <div class="bg-white h-48 p-2 rounded-xl shadow-md border-t-4 border-brandNavy flex items-center justify-center hover:-translate-y-1 transition">
-                <img src="invitado.png" alt="Aliado 2" class="w-full h-full object-contain">
-            </div>
-
-            <div class="bg-white h-48 p-2 rounded-xl shadow-md border-t-4 border-brandGold flex items-center justify-center hover:-translate-y-1 transition">
-                <img src="invitado.png" alt="Aliado 3" class="w-full h-full object-contain">
-            </div>
-
-            <div class="bg-white h-48 p-2 rounded-xl shadow-md border-t-4 border-brandNavy flex items-center justify-center hover:-translate-y-1 transition">
-                <img src="invitado.png" alt="Aliado 4" class="w-full h-full object-contain">
-            </div>
-
-            <div class="bg-white h-48 p-2 rounded-xl shadow-md border-t-4 border-brandGold flex items-center justify-center hover:-translate-y-1 transition">
-                <img src="invitado.png" alt="Aliado 5" class="w-full h-full object-contain">
-            </div>
-
-            <div class="bg-white h-48 p-2 rounded-xl shadow-md border-t-4 border-brandNavy flex items-center justify-center hover:-translate-y-1 transition">
-                <img src="invitado.png" alt="Aliado 6" class="w-full h-full object-contain">
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Respaldos y Alianzas -->
-    <section id="aliados" class="bg-gray-100 py-16 px-6 border-y border-gray-200">
-        <div class="max-w-6xl mx-auto">
-
-            <h3 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-10 text-center">
-                Organizado Por:
-            </h3>
-
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 md:p-10">
-
-                <div class="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
-
-                    <!-- Imagen -->
-                    <div class="flex items-center justify-center">
-                        <img src="SUMMITBLANCO.jpeg"
-                             alt="Red Mundial de Jóvenes Políticos"
-                             class="h-24 md:h-36 w-auto max-w-full object-contain">
+                    <div class="hero-points">
+                        <div class="hero-point">
+                            <span class="point-dot" aria-hidden="true">✓</span>
+                            <span><strong>Mayor vida de anaquel:</strong> Frena la deshidratación y conserva la frescura natural durante el transporte y almacenaje.</span>
+                        </div>
+                        <div class="hero-point">
+                            <span class="point-dot" aria-hidden="true">✓</span>
+                            <span><strong>Brillo de exportación:</strong> Proporciona un acabado uniforme que resalta la calidad ante los compradores más exigentes.</span>
+                        </div>
+                        <div class="hero-point">
+                            <span class="point-dot" aria-hidden="true">✓</span>
+                            <span><strong>Asesoría técnica en tu empaque:</strong> Te guiamos en la dosificación y calibración óptima para tu línea de producción.</span>
+                        </div>
                     </div>
 
-                    <!-- Información -->
-                    <div class="text-left">
-                        <h2 class="text-2xl md:text-3xl font-bold text-brandNavy font-serif-title mb-5">
-                            Acerca de Summit Empresarial México
-                        </h2>
-
-                        <p class="text-gray-600 leading-relaxed">
-                            <strong class="text-brandNavy">LA PRIMERA EDICION</strong> de Summit Empresarial
-                            Mexico Se llevo acabo <strong class="text-brandNavy">EN SALTILLO COAHUILA EN EL CENTRO
-                            CULTURAL VITO ALESSIO ROBLES,</strong> en donde mas de 150 jovenes participaron a lo largo 
-                            de dos dias, con 15 ponentes en total, se llevaron a cabo dinamicas de empresas aliadas,
-                            y la EXPO SUMMIT dando la oportunidad a emprendedores de dar a conocer su negocio.
-                        </p>
-
-                        <p class="text-gray-600 leading-relaxed mt-4">
-                           La edición online de Summit Empresarial significó el
-                         lanzamiento nacional del programa donde más de 300
-                         jóvenes participarón en sesiones de 60 minutos con ponentes
-                         altamente calificados e involucrados en el sector empresarial.
-                        </p>
+                    <div class="btns">
+                        <a href="https://wa.me/522299783526?text=Hola%2C%20me%20comunico%20desde%20la%20p%C3%A1gina%20web%20de%20ShalomIndustrial.%20Me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n%20y%20cotizaci%C3%B3n." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" aria-label="Contáctanos por WhatsApp al 229 978 3526">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.159.57 4.188 1.564 5.946l-1.637 5.982 6.161-1.616c1.703.93 3.652 1.467 5.728 1.467 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            <span>Contáctanos por WhatsApp</span>
+                        </a>
+                        <a href="#productos" class="btn btn-ghost">Ver productos</a>
                     </div>
-
+                </div>
+                <div class="slices" aria-hidden="true">
+                    <div class="slice s1"></div>
+                    <div class="slice s2"></div>
+                    <div class="slice s3"></div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Agenda -->
-    <section id="agenda" class="py-20 px-6 max-w-5xl mx-auto">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-brandNavy font-serif-title">AGENDA DEL EVENTO</h2>
-            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Programa Preliminar de las actividades</p>
-        </div>
-
-        <!-- Marco azul exterior -->
-        <div class="bg-brandNavy rounded-[2rem] p-3 md:p-5 shadow-2xl">
-            <!-- Tarjeta blanca interior -->
-            <div class="bg-white rounded-[1.5rem] p-4 md:p-8">
-
-                <!-- Pastilla de turno -->
-                <div class="bg-brandNavy text-white rounded-full px-6 md:px-8 py-4 flex justify-between items-center mb-4">
-                    <span class="text-lg md:text-xl font-bold tracking-wide">AM - PM  DIA 1</span>
-                    <span class="text-sm md:text-base text-gray-200">08:00 - 17:30 hrs.</span>
-                </div>
-
-                <!-- Lista de actividades -->
-                <div class="divide-y divide-gray-200">
-
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">08:00 - 09:00</span>
-                        <div>
-                            <p class="text-sm text-gray-500 mt-1">REGISTRO Y COFFE BREAK</p>
-                            <p class="text-sm text-gray-500 mt-1">Entrega de Kits de bienvenida.</p>
-                            <p class="text-sm text-gray-500 mt-1">Asignacion de lugares</p>
-                            <p class="text-sm text-gray-500 mt-1">Cierre de puertas general 9:00 AM</p>
-                        </div>
+        <!-- BENEFICIOS -->
+        <section>
+            <div class="wrap">
+                <span class="eyebrow">Por qué Shalom</span>
+                <h2>Más fruta vendible, menos merma</h2>
+                <p class="lead">Una buena cera cuida la fruta desde el empaque hasta el punto de venta.</p>
+                <div class="cards3">
+                    <div class="card">
+                        <div class="icon">01</div>
+                        <h3>Vida de anaquel</h3>
+                        <p>Reduce la pérdida de humedad y conserva la frescura durante el transporte.</p>
                     </div>
-
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">09:00 - 10:00</span>
-                        <div>
-                            <p class="text-sm text-gray-500 mt-1">SALUDO A LA BANDERA </p>
-                            <p class="text-sm text-gray-500 mt-1">Banda de guerra</p>
-                            <p class="text-sm text-gray-500 mt-1">Mensaje De Antonio Rincon FUNDADOR DE SUMMIT EMPRESARIAL</p>
-                            <p class="text-sm text-gray-500 mt-1">Mensaje Rector del tec de monterrey</p>
-                            <p class="text-sm text-gray-500 mt-1">Mensaje Presidente COPARMEX Jovenes Nacional</p>
-                        </div>
+                    <div class="card">
+                        <div class="icon">02</div>
+                        <h3>Brillo y presentación</h3>
+                        <p>Acabado uniforme que mejora el aspecto de la fruta frente al comprador.</p>
                     </div>
-
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">10:00 - 11:00</span>
-                        <div>
-                            <p class="text-sm text-gray-500 mt-1">Bloque 1 | Vision Estrategica</p>
-                            <p class="text-sm text-gray-500 mt-1">Conferencia Magistral</p>
-                            <p class="text-sm text-gray-500 mt-1">El futuro de la competividad empresarial</p>
-
-                        </div>
-                    </div>
-
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">11:00 - 11:30</span>
-                        <div>
-                             <p class="text-sm text-gray-500 mt-1">Coffe Break & Networking</p>
-                            <p class="text-sm text-gray-500 mt-1">11:25 TODOS A SUS LUGARES</p>
-                        </div>
-                    </div>
-
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">11:30 - 12:20</span>
-                        <div>
-                            <p class="text-sm text-gray-500 mt-1">Bloque ll | Diferenciacion </p>
-                            <p class="text-sm text-gray-500 mt-1">Marca Personal Como Ventaja Competitiva</p>
-                        
-                        </div>
-                    </div>
-
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">12:30 - 13:20</span>
-                        <div>
-                            <p class="text-sm text-gray-500 mt-1">Como Destacar En Un Mundo De Oportunidades.</p>
-                        </div>
-                    </div>
-
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">13:30 - 14:30</span>
-                        <div>
-                            <p class="text-sm text-gray-500 mt-1">RECESO 1 HORA DE COMER</p>
-                        </div>
-                    </div>
-
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">14:30 - 15:30</span>
-                        <div>
-                            <p class="text-sm text-gray-500 mt-1">Innovacion Como Ventaja Competitiva</p>
-                        </div>
-                    </div>
-
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">15:30 - 17:00</span>
-                        <div>
-                             <p class="text-sm text-gray-500 mt-1">Conferencia Magistral De Cierre</p>
-                            <p class="text-sm text-gray-500 mt-1"> DINAMICA STARTUP MEXICO</p>
-                        </div>
-                    </div>
-
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">17:00 - 17:30</span>
-                        <div>
-                             <p class="text-sm text-gray-500 mt-1">Cierre Del Dia 1</p>
-                            <p class="text-sm text-gray-500 mt-1"> Show De Musica De Saxofon</p>
-                            <p class="text-sm text-gray-500 mt-1"> Mensaje Final De Antonio Rincon FUNDADOR DE SUMMIT EMPRESARIAL</p>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Agenda Día 2 -->
-    <section id="agenda-dia-2" class="py-20 px-6 max-w-5xl mx-auto">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-brandNavy font-serif-title">AGENDA DEL DÍA 2</h2>
-            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Programa de actividades del segundo día</p>
-        </div>
-
-        <!-- Marco azul exterior -->
-        <div class="bg-brandNavy rounded-[2rem] p-3 md:p-5 shadow-2xl">
-            <!-- Tarjeta blanca interior -->
-            <div class="bg-white rounded-[1.5rem] p-4 md:p-8">
-
-                <!-- Pastilla de turno -->
-                <div class="bg-brandNavy text-white rounded-full px-6 md:px-8 py-4 flex justify-between items-center mb-4">
-                    <span class="text-lg md:text-xl font-bold tracking-wide">AM - PM  DÍA 2</span>
-                    <span class="text-sm md:text-base text-gray-200">09:00 - 17:30 hrs.</span>
-                </div>
-
-                <!-- Lista de actividades -->
-                <div class="divide-y divide-gray-200">
-
-                    <!-- ACTIVIDAD 1 -->
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">09:00 - 10:00</span>
-                        <div>
-                            <p class="text-sm text-gray-500 mt-1">Registro De Asistentes</p>
-                            <p class="text-sm text-gray-500 mt-1">Pasar A Los Asistentes A Sus Lugares.</p>
-                        </div>
-                    </div>
-
-                    <!-- ACTIVIDAD 2 -->
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">10:00 - 11:00</span>
-                        <div>
-                            <p class="text-sm text-gray-500 mt-1">Conferencia Magistral</p>
-                            <p class="text-sm text-gray-500 mt-1">Lidera Como Atleta.</p>
-                        </div>
-                    </div>
-
-                    <!-- ACTIVIDAD 3 -->
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">11:00 - 11:30</span>
-                        <div>
-                            <p class="text-sm text-gray-500 mt-1"></p>Coffe Break & Networking</p>
-                        </div>
-                    </div>
-
-                    <!-- ACTIVIDAD 4 -->
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">11:30 - 12:30</span>
-                        <div>
-                            <p class="text-sm text-gray-500 mt-1">Inteligencia Artificial Aplicada A Los Negocios</p>
-                        </div>
-                    </div>
-
-                    <!-- ACTIVIDAD 5 -->
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">12:30 - 13:30</span>
-                        <div>
-                            <p class="text-sm text-gray-500 mt-1">Receso(food) EXPO SUMMIT</p>
-                        </div>
-                    </div>
-
-                    <!-- ACTIVIDAD 6 -->
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">13:30 - 14:20</span>
-                        <div>
-                            <p class="text-sm text-gray-500 mt-1">Taller: Ventas De Alto Valor</p>
-                        </div>
-                    </div>
-
-                    <!-- ACTIVIDAD 7-->
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">14:30 - 15:20</span>
-                        <div>
-                            <p class="text-sm text-gray-500 mt-1">Nearshoring Y Oportunidades Para PYMES En El Extranjero</p>
-                        </div>
-                    </div>
-
-                    <!-- ACTIVIDAD 8 -->
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">15:30 - 17:00</span>
-                        <div>
-                            <p class="text-sm text-gray-500 mt-1">Conferencia Magistral De Cierre</p>
-                        </div>
-                    </div>
-
-                    <!-- ACTIVIDAD 9 -->
-                    <div class="py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
-                        <span class="w-40 shrink-0 text-xl md:text-2xl font-bold text-blue-700">17:00 - 17:30</span>
-                        <div>
-                            <p class="text-sm text-gray-500 mt-1">Ceremonia De Clausura</p>
-                            <p class="text-sm text-gray-500 mt-1">Mensaje Del Comite Organizador</p>
-                                  <p class="text-sm text-gray-500 mt-1"> Clausura Oficial De Summit Empresarial Mexico-Edicion Nacional.</p>
-                        </div>
+                    <div class="card">
+                        <div class="icon">03</div>
+                        <h3>Soporte técnico</h3>
+                        <p>Te asesoramos en la aplicación y dosificación para tu línea de empaque.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
+        <!-- PRODUCTOS -->
+        <section id="productos">
+            <div class="wrap">
+                <span class="eyebrow">Catálogo</span>
+                <h2>Química y Ceras Especializadas</h2>
+                <p class="lead">Soluciones de alto rendimiento para el lavado, desinfección, protección y brillo en líneas de empaque.</p>
 
-    <!-- =========================================
-     PATROCINADORES - CINTA PREMIUM
-     ========================================= -->
+                <div class="products-grid">
+                    <!-- Producto 1: Cera con Carnauba -->
+                    <div class="card prod">
+                        <div class="prod-top prod-carnauba">
+                            <span class="prod-tag">Brillo Premium</span>
+                            <div class="prod-icon-wrapper">
+                                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="prod-body">
+                            <h3>Cera con Carnauba</h3>
+                            <div class="prod-price">
+                                <span class="price-val">$9,000</span>
+                                <span class="price-unit">MXN</span>
+                            </div>
+                            <p class="prod-desc">Máximo brillo espejo y barrera de alta duración contra la pérdida de peso y deshidratación.</p>
+                            <ul>
+                                <li>Formulación con cera de carnauba pura</li>
+                                <li>Grado alimenticio de exportación</li>
+                                <li>Excelente secado uniforme</li>
+                            </ul>
+                            <a href="#contacto" class="btn btn-card">Cotizar producto →</a>
+                        </div>
+                    </div>
 
-    <section id="patrocinadores" class="premium-sponsors">
+                    <!-- Producto 2: Cera Normal -->
+                    <div class="card prod">
+                        <div class="prod-top prod-normal">
+                            <span class="prod-tag">Línea Estándar</span>
+                            <div class="prod-icon-wrapper">
+                                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="prod-body">
+                            <h3>Cera Normal</h3>
+                            <div class="prod-price">
+                                <span class="price-val">$5,000</span>
+                                <span class="price-unit">MXN</span>
+                            </div>
+                            <p class="prod-desc">Recubrimiento equilibrado para protección comercial continua y preservación de frescura en anaquel.</p>
+                            <ul>
+                                <li>Brillo natural atractivo</li>
+                                <li>Protección contra pérdida de agua</li>
+                                <li>Óptimo rendimiento en empaque</li>
+                            </ul>
+                            <a href="#contacto" class="btn btn-card">Cotizar producto →</a>
+                        </div>
+                    </div>
 
-        <div class="premium-sponsors-header">
-            <h2>
-                PATROCINADORES
-                <span>OFICIALES</span>
-            </h2>
+                    <!-- Producto 3: Saniclean 20 lt -->
+                    <div class="card prod">
+                        <div class="prod-top prod-saniclean">
+                            <span class="prod-tag">Inocuidad 20L</span>
+                            <div class="prod-icon-wrapper">
+                                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    <polyline points="9 12 11 14 15 10"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="prod-body">
+                            <h3>Saniclean 20 lt</h3>
+                            <div class="prod-price">
+                                <span class="price-val">$1,350</span>
+                                <span class="price-unit">MXN (20 L)</span>
+                            </div>
+                            <p class="prod-desc">Sanitizante especializado de amplio espectro para tinas de lavado y desinfección de cítricos.</p>
+                            <ul>
+                                <li>Desinfección de cáscara y agua</li>
+                                <li>No deja residuos nocivos</li>
+                                <li>Presentación porrón de 20 Litros</li>
+                            </ul>
+                            <a href="#contacto" class="btn btn-card">Cotizar producto →</a>
+                        </div>
+                    </div>
 
-            <p>
-                EMPRESAS Y ORGANIZACIONES QUE COMPARTEN NUESTRA VISION DE IMPULSAR EL DESARROLLO EMPRESARIAL DE MEXICO.
-            </p>
-        </div>
+                    <!-- Producto 4: Sin Gras 20 lt -->
+                    <div class="card prod">
+                        <div class="prod-top prod-singras">
+                            <span class="prod-tag">Desengrasante 20L</span>
+                            <div class="prod-icon-wrapper">
+                                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 16.5l-5-3 10-6 10 6-5 3"></path>
+                                    <path d="M2 13.5v4l10 6 10-6v-4"></path>
+                                    <path d="M12 12v9"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="prod-body">
+                            <h3>Sin Gras 20 lt</h3>
+                            <div class="prod-price">
+                                <span class="price-val">$1,350</span>
+                                <span class="price-unit">MXN (20 L)</span>
+                            </div>
+                            <p class="prod-desc">Detergente desengrasante para remover fumagina, polvo y grasa natural antes del encerado.</p>
+                            <ul>
+                                <li>Limpieza profunda sin dañar cáscara</li>
+                                <li>Facilita la adherencia de la cera</li>
+                                <li>Presentación porrón de 20 Litros</li>
+                            </ul>
+                            <a href="#contacto" class="btn btn-card">Cotizar producto →</a>
+                        </div>
+                    </div>
 
-
-        <div class="premium-marquee">
-
-            <div class="premium-track">
-
-                <div class="premium-logo">
-                    <img src="proximamente.png" alt="Patrocinador 1">
+                    <!-- Producto 5: Sin Gras 200 lt -->
+                    <div class="card prod">
+                        <div class="prod-top prod-singras-bulk">
+                            <span class="prod-tag">Industrial 200L</span>
+                            <div class="prod-icon-wrapper">
+                                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="4" y="2" width="16" height="20" rx="3"></rect>
+                                    <line x1="4" y1="8" x2="20" y2="8"></line>
+                                    <line x1="4" y1="16" x2="20" y2="16"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="prod-body">
+                            <h3>Sin Gras 200 lt</h3>
+                            <div class="prod-price">
+                                <span class="price-val">$9,500</span>
+                                <span class="price-unit">MXN (Tambor 200 L)</span>
+                            </div>
+                            <p class="prod-desc">Presentación a granel de alta eficiencia económica para empacadoras de gran escala de producción.</p>
+                            <ul>
+                                <li>Máximo ahorro por litro</li>
+                                <li>Ideal para líneas de alta rotación</li>
+                                <li>Tambor sellado de 200 Litros</li>
+                            </ul>
+                            <a href="#contacto" class="btn btn-card">Cotizar producto →</a>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="premium-logo">
-                    <img src="proximamente.png" alt="Patrocinador 2">
+                <!-- Aviso de IVA -->
+                <div class="iva-notice">
+                    <span class="iva-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                    </span>
+                    <p class="iva-text">
+                        <strong>Aviso importante:</strong> Ninguno de estos productos incluye IVA.
+                    </p>
                 </div>
-
-                <div class="premium-logo">
-                    <img src="proximamente.png" alt="Patrocinador 3">
-                </div>
-
-                <div class="premium-logo">
-                    <img src="proximamente.png" alt="Patrocinador 4">
-                </div>
-
-                <div class="premium-logo">
-                    <img src="proximamente.png" alt="Patrocinador 5">
-                </div>
-
-                <div class="premium-logo">
-                    <img src="proximamente.png" alt="Patrocinador 6">
-                </div>
-
-
-                <!-- REPETICIÓN PARA EL LOOP -->
-
-                <div class="premium-logo">
-                    <img src="proximamente.png" alt="Patrocinador 1">
-                </div>
-
-                <div class="premium-logo">
-                    <img src="proximamente.png" alt="Patrocinador 2">
-                </div>
-
-                <div class="premium-logo">
-                    <img src="proximamente.png" alt="Patrocinador 3">
-                </div>
-
-                <div class="premium-logo">
-                    <img src="proximamente.png" alt="Patrocinador 4">
-                </div>
-
-                <div class="premium-logo">
-                    <img src="proximamente.png" alt="Patrocinador 5">
-                </div>
-
-                <div class="premium-logo">
-                    <img src="proximamente.png" alt="Patrocinador 6">
-                </div>
-
             </div>
+        </section>
 
-        </div>
-
-    </section>
-    <!-- Registro y Pago -->
-    <section id="registro" class="py-20 px-6 max-w-3xl mx-auto">
-        <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-gray-100 text-center">
-            <h2 class="text-2xl md:text-3xl font-bold text-brandNavy font-serif-title">Acceso Completo</h2>
-
-            <div class="flex justify-center items-baseline gap-2 mt-8">
-                <span class="text-4xl md:text-5xl font-bold text-brandNavy">$350.00</span>
-                <span class="text-gray-500 font-medium">MXN · Acceso Completo</span>
+        <!-- EXPORTACIÓN -->
+        <section id="exportacion">
+            <div class="wrap export">
+                <div>
+                    <span class="eyebrow">Exportación</span>
+                    <h2>Entregamos donde está tu producción</h2>
+                    <p class="lead">Venta nacional y exportación con logística, documentación y acompañamiento en cada envío. [Describe aquí tus mercados y certificaciones.]</p>
+                </div>
+                <div class="stats">
+                    <div class="stat"><b>+00</b><span>Años de experiencia</span></div>
+                    <div class="stat"><b>+00</b><span>Países atendidos</span></div>
+                    <div class="stat"><b>3</b><span>Líneas: limón, naranja y piña</span></div>
+                    <div class="stat"><b>24 h</b><span>Respuesta a cotizaciones</span></div>
+                </div>
             </div>
+        </section>
 
-            <ul class="text-sm text-gray-600 mt-6 space-y-2 text-left max-w-sm mx-auto">
-                <li class="flex items-start gap-2"><span class="text-brandGold mt-0.5">•</span> KITS DE BIENVENIDA</li>
-                <li class="flex items-start gap-2"><span class="text-brandGold mt-0.5">•</span> CONFERENCIAS MAGISTRALES Y PANELES</li>
-                <li class="flex items-start gap-2"><span class="text-brandGold mt-0.5">•</span> TALLERES PRACTICOS DE FORMACION EMPRESARIAL</li>
-                <li class="flex items-start gap-2"><span class="text-brandGold mt-0.5">•</span> CONSULTORÍA EMPRESARIAL Y MENTORÍA 1 A 1</li>
-                <li class="flex items-start gap-2"><span class="text-brandGold mt-0.5">•</span> COFFE BREAK DE BIENVENIDA</li>
-                <li class="flex items-start gap-2"><span class="text-brandGold mt-0.5">•</span> CERTIFICADO DE PARTICIPACION ENVIADO A TU CORREO</li>
-            </ul>
-
-            <span class="inline-block mt-8 bg-gray-300 text-gray-500 font-bold px-8 py-3.5 rounded shadow cursor-not-allowed opacity-70"
-                  aria-disabled="true">
-                Proximamente...
-            </span>
-        </div>
-    </section>
-
-    <!-- Footer con derechos -->
-    <footer class="bg-brandNavyDark text-white py-8 px-6 border-t border-brandGold/30">
-        <div class="max-w-7xl mx-auto text-center">
-
-            <p class="text-sm text-gray-400">
-                © 2026
-                <span class="text-brandGold font-semibold">
-                SUMMIT EMPRESARIAL MÉXICO
-            </span> · Todos los derechos reservados.
-            </p>
-
-            <!-- Redes Sociales -->
-            <div class="flex justify-center items-center gap-5 mt-5">
-                <a href="mailto:summitempresarialmexico@gmail.com" aria-label="Gmail" class="text-gray-400 hover:text-brandGold transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-5 h-5">
-                    <rect x="3" y="5" width="18" height="14" rx="2"/>
-                    <path d="M3 7l9 6 9-6"/>
-                </svg>
-                </a>
-                <a href="https://instagram.com/summitempresarialmexico" target="_blank" rel="noopener" aria-label="Instagram" class="text-gray-400 hover:text-brandGold transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-5 h-5">
-                    <rect x="3" y="3" width="18" height="18" rx="5"/>
-                    <circle cx="12" cy="12" r="4"/>
-                    <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/>
-                </svg>
-                </a>
-                <a href="https://www.tiktok.com/@summitempresarialmexico" target="_blank" rel="noopener" aria-label="TikTok" class="text-gray-400 hover:text-brandGold transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                    <path d="M14 3c.3 1.9 1.6 3.3 3.5 3.6v2.4c-1.3 0-2.5-.4-3.5-1.1v6.3a4.9 4.9 0 1 1-4.2-4.9v2.5a2.4 2.4 0 1 0 1.7 2.3V3h2.5Z"/>
-                </svg>
-                </a>
+        <!-- CONTACTO -->
+        <section id="contacto">
+            <div class="wrap">
+                <span class="eyebrow">Contacto</span>
+                <h2>Cuéntanos qué necesitas</h2>
+                <p class="lead">Te respondemos con una propuesta para tu fruta y tu volumen.</p>
+                <form id="form-contacto">
+                    <input type="text" placeholder="Nombre o empresa" required>
+                    <input type="email" placeholder="Correo electrónico" required>
+                    <select aria-label="Producto de interés">
+                        <option value="" disabled selected>Selecciona el producto a cotizar</option>
+                        <option value="carnauba">Cera con Carnauba ($9,000)</option>
+                        <option value="normal">Cera Normal ($5,000)</option>
+                        <option value="saniclean">Saniclean 20 lt ($1,350)</option>
+                        <option value="singras20">Sin Gras 20 lt ($1,350)</option>
+                        <option value="singras200">Sin Gras 200 lt ($9,500)</option>
+                        <option value="varios">Pedido múltiple / Varios productos</option>
+                    </select>
+                    <textarea rows="4" placeholder="Volumen y destino aproximado"></textarea>
+                    <button class="btn btn-main" type="submit">Enviar solicitud</button>
+                </form>
             </div>
+        </section>
+    </main>
 
-            <!-- Firma del CEO -->
-   <p class="text-[10px] text-gray-500 uppercase">
-                    Summit Empresarial México
-                </p>
-            </div>
-
+    <footer>
+        <div class="wrap">
+            <span>© ShalomIndustrial. Todos los derechos reservados.</span>
+            <span>WhatsApp / Tel: <a href="https://wa.me/522299783526" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">+52 229 978 3526</a> · México</span>
         </div>
     </footer>
 
+    <!-- Botón Flotante de WhatsApp -->
+    <a href="https://wa.me/522299783526?text=Hola%2C%20me%20comunico%20desde%20la%20p%C3%A1gina%20web%20de%20ShalomIndustrial.%20Me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n%20y%20cotizaci%C3%B3n." class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Abrir chat de WhatsApp con ShalomIndustrial al 229 978 3526">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.159.57 4.188 1.564 5.946l-1.637 5.982 6.161-1.616c1.703.93 3.652 1.467 5.728 1.467 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/>
+        </svg>
+    </a>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
