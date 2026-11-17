@@ -302,28 +302,31 @@
                 <h2>Cuéntanos qué necesitas</h2>
                 <p class="lead">Te respondemos con una propuesta para tu fruta y tu volumen.</p>
                 <form id="form-contacto">
-                    <input type="text" placeholder="Nombre o empresa" required>
-                    <input type="email" placeholder="Correo electrónico" required>
-                    <select aria-label="Producto de interés">
+                    <input type="text" id="contacto-nombre" placeholder="Nombre completo o Empresa" required>
+                    <input type="email" id="contacto-email" placeholder="Correo electrónico corporativo" required>
+                    <input type="tel" id="contacto-telefono" placeholder="Número de teléfono / WhatsApp (ej. 229 123 4567)" required>
+                    <select id="contacto-interes" aria-label="Producto de interés" required>
                         <option value="" disabled selected>Selecciona el producto a cotizar</option>
-                        <option value="carnauba">Cera con Carnauba ($9,000)</option>
-                        <option value="normal">Cera Normal ($5,000)</option>
-                        <option value="saniclean">Saniclean 20 lt ($1,350)</option>
-                        <option value="singras20">Sin Gras 20 lt ($1,350)</option>
-                        <option value="singras200">Sin Gras 200 lt ($9,500)</option>
-                        <option value="varios">Pedido múltiple / Varios productos</option>
+                        <option value="Cera con Carnauba ($9,000)">Cera con Carnauba ($9,000)</option>
+                        <option value="Cera Normal ($5,000)">Cera Normal ($5,000)</option>
+                        <option value="Saniclean 20 lt ($1,350)">Saniclean 20 lt ($1,350)</option>
+                        <option value="Sin Gras 20 lt ($1,350)">Sin Gras 20 lt ($1,350)</option>
+                        <option value="Sin Gras 200 lt ($9,500)">Sin Gras 200 lt ($9,500)</option>
+                        <option value="Pedido múltiple / Varios">Pedido múltiple / Varios productos</option>
                     </select>
-                    <textarea rows="4" placeholder="Volumen y destino aproximado"></textarea>
-                    <button class="btn btn-main" type="submit">Enviar solicitud</button>
+                    <textarea id="contacto-mensaje" rows="4" placeholder="Volumen aproximado y destino de entrega (opcional)"></textarea>
+                    <button class="btn btn-main" type="submit" id="btn-enviar-cotizacion">Enviar solicitud</button>
+                    <div id="contacto-feedback" class="form-feedback" style="display: none;"></div>
                 </form>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="wrap">
+        <div class="wrap footer-wrap">
             <span>© ShalomIndustrial. Todos los derechos reservados.</span>
             <span>WhatsApp / Tel: <a href="https://wa.me/522299783526" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">+52 229 978 3526</a> · México</span>
+            <span class="admin-link-span"><a href="admin.html" class="footer-admin-link">🔒 Acceso Administrador</a></span>
         </div>
     </footer>
 
@@ -334,7 +337,9 @@
         </svg>
     </a>
 
+    <!-- Scripts -->
     <script src="script.js"></script>
+    <script src="voice-agent.js"></script>
 </body>
 
 </html>
