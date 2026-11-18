@@ -377,7 +377,7 @@
                         </div>
                     </div>
                     <div class="voice-header-actions">
-                        <button id="voice-settings-btn" title="Configurar Voz ElevenLabs" class="voice-icon-btn">⚙️</button>
+                        <button id="voice-settings-btn" title="Cambiar Voz del Asistente" class="voice-icon-btn">⚙️</button>
                         <button id="voice-mute-btn" title="Activar/Silenciar Audio" class="voice-icon-btn">🔊</button>
                         <button id="voice-close-btn" title="Cerrar Asistente" class="voice-icon-btn">✕</button>
                     </div>
@@ -425,26 +425,24 @@
                     <button id="voice-send-btn" class="voice-send-action" title="Enviar consulta">➤</button>
                 </div>
 
-                <!-- Panel de Configuración de ElevenLabs -->
+                <!-- Panel de Selección de Voz para el Usuario/Cliente -->
                 <div id="voice-settings-panel" class="voice-settings-panel" style="display: none;">
-                    <h5>⚙️ Configuración de Motor de Voz</h5>
-                    <p class="settings-desc">Tu API Key oficial de ElevenLabs se encuentra vinculada y activa.</p>
-                    <label>ElevenLabs API Key:</label>
-                    <input type="text" id="input-elevenlabs-key" placeholder="xi-api-key..." value="${STATE.elevenLabsKey}">
-                    <label>Selecciona la Voz:</label>
-                    <select id="select-elevenlabs-voice" style="width:100%; padding:8px 12px; background:#05140e; border:1px solid #1a4a39; border-radius:8px; color:#fff; font-size:0.85rem; margin-bottom:8px;">
-                        <option value="EXAVITQu4vr4xnSDxMaL" ${STATE.elevenLabsVoiceId === 'EXAVITQu4vr4xnSDxMaL' ? 'selected' : ''}>Sarah (Profesional, Clara y Confiable)</option>
-                        <option value="cgSgspJ2msm6clMCkdW9" ${STATE.elevenLabsVoiceId === 'cgSgspJ2msm6clMCkdW9' ? 'selected' : ''}>Jessica (Cálida y Amable)</option>
-                        <option value="FGY2WhTYpPnrIDTdsKH5" ${STATE.elevenLabsVoiceId === 'FGY2WhTYpPnrIDTdsKH5' ? 'selected' : ''}>Laura (Entusiasta y Dinámica)</option>
-                        <option value="nPczCjzI2devNBz1zQrb" ${STATE.elevenLabsVoiceId === 'nPczCjzI2devNBz1zQrb' ? 'selected' : ''}>Brian (Masculina Profunda y Confortante)</option>
-                        <option value="pNInz6obpgDQGcFmaJgB" ${STATE.elevenLabsVoiceId === 'pNInz6obpgDQGcFmaJgB' ? 'selected' : ''}>Adam (Masculina Firme y Ejecutiva)</option>
-                    </select>
+                    <h5>🎙️ Selecciona la Voz del Asistente</h5>
+                    <p class="settings-desc">Elige la voz en español que prefieras escuchar:</p>
+                    <div style="margin-bottom: 12px;">
+                        <select id="select-elevenlabs-voice" style="width:100%; padding:10px 14px; background:#05140e; border:1px solid #1a4a39; border-radius:10px; color:#fff; font-size:0.88rem; outline:none; cursor:pointer;">
+                            <option value="EXAVITQu4vr4xnSDxMaL" ${STATE.elevenLabsVoiceId === 'EXAVITQu4vr4xnSDxMaL' ? 'selected' : ''}>👩 Sarah (Femenina — Profesional y Confiable)</option>
+                            <option value="cgSgspJ2msm6clMCkdW9" ${STATE.elevenLabsVoiceId === 'cgSgspJ2msm6clMCkdW9' ? 'selected' : ''}>👩 Jessica (Femenina — Cálida y Amable)</option>
+                            <option value="FGY2WhTYpPnrIDTdsKH5" ${STATE.elevenLabsVoiceId === 'FGY2WhTYpPnrIDTdsKH5' ? 'selected' : ''}>👩 Laura (Femenina — Entusiasta y Dinámica)</option>
+                            <option value="nPczCjzI2devNBz1zQrb" ${STATE.elevenLabsVoiceId === 'nPczCjzI2devNBz1zQrb' ? 'selected' : ''}>👨 Brian (Masculina — Profunda y Confortante)</option>
+                            <option value="pNInz6obpgDQGcFmaJgB" ${STATE.elevenLabsVoiceId === 'pNInz6obpgDQGcFmaJgB' ? 'selected' : ''}>👨 Adam (Masculina — Firme y Ejecutiva)</option>
+                        </select>
+                    </div>
                     <div class="settings-help">
-                        <small>✓ <strong>Estado:</strong> Conectado a la API oficial de ElevenLabs.<br>
-                        Modelo activo: <code>eleven_multilingual_v2</code> (Español fluido de alta fidelidad).</small>
+                        <small>✨ <strong>Voz AI de Alta Fidelidad:</strong> Puedes cambiar de voz cuando desees para escuchar diferentes tonos y estilos.</small>
                     </div>
                     <div class="settings-actions">
-                        <button id="btn-save-settings" class="btn btn-main btn-sm">Guardar Cambios</button>
+                        <button id="btn-save-settings" class="btn btn-main btn-sm">Guardar Voz</button>
                         <button id="btn-close-settings" class="btn btn-ghost btn-sm">Cerrar</button>
                     </div>
                 </div>
@@ -521,24 +519,40 @@
         });
 
         saveSettingsBtn.addEventListener('click', () => {
-            const key = document.getElementById('input-elevenlabs-key').value.trim();
-            const voice = document.getElementById('select-elevenlabs-voice')?.value || DEFAULT_VOICE_ID;
-            STATE.elevenLabsKey = key;
+            const voiceSelect = document.getElementById('select-elevenlabs-voice');
+            const voice = voiceSelect?.value || DEFAULT_VOICE_ID;
+            const selectedText = voiceSelect?.options[voiceSelect.selectedIndex]?.text || 'Sarah';
+            const voiceName = selectedText.split('(')[0].replace(/[^a-zA-ZáéíóúÁÉÍÓÚ]/g, '').trim() || 'nueva';
+
+            // Asegurar que la API key oficial de ElevenLabs permanezca siempre activa
+            if (!STATE.elevenLabsKey) {
+                STATE.elevenLabsKey = DEFAULT_ELEVENLABS_KEY;
+                localStorage.setItem('shalom_elevenlabs_key', DEFAULT_ELEVENLABS_KEY);
+            }
+
             STATE.elevenLabsVoiceId = voice;
-            localStorage.setItem('shalom_elevenlabs_key', key);
             localStorage.setItem('shalom_elevenlabs_voice', voice);
+
             settingsPanel.style.display = 'none';
             updateEngineBadge();
-            addAssistantMessage('✓ Configuración de voz actualizada. Motor listo para responder.');
-            speakText('Configuración de voz guardada correctamente.');
+            addAssistantMessage(`✓ Voz actualizada. A partir de ahora te responderé con la voz de ${voiceName}.`);
+            speakText(`Has elegido la voz de ${voiceName}. ¿En qué puedo apoyarte hoy?`);
         });
     }
 
     function updateEngineBadge() {
         const badge = document.getElementById('voice-engine-label');
         if (!badge) return;
+        const voiceNames = {
+            'EXAVITQu4vr4xnSDxMaL': 'Sarah',
+            'cgSgspJ2msm6clMCkdW9': 'Jessica',
+            'FGY2WhTYpPnrIDTdsKH5': 'Laura',
+            'nPczCjzI2devNBz1zQrb': 'Brian',
+            'pNInz6obpgDQGcFmaJgB': 'Adam'
+        };
+        const activeName = voiceNames[STATE.elevenLabsVoiceId] || 'Sarah';
         if (STATE.elevenLabsKey) {
-            badge.textContent = '⚡ ElevenLabs AI Activo';
+            badge.textContent = `⚡ Voz AI: ${activeName}`;
             badge.style.color = 'var(--limon)';
             badge.style.borderColor = 'rgba(232, 212, 77, 0.4)';
         } else {
