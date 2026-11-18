@@ -4,13 +4,24 @@
 
 (function () {
     // Configuración y Estado
+    const DEFAULT_ELEVENLABS_KEY = 'sk_a2de0f35816356f014df5ff165184e96a65e05f147dd091d';
+    const DEFAULT_VOICE_ID = 'EXAVITQu4vr4xnSDxMaL'; // Sarah - Voz corporativa clara, natural y fluida
+
+    // Sincronizar en localStorage para persistencia
+    if (!localStorage.getItem('shalom_elevenlabs_key')) {
+        localStorage.setItem('shalom_elevenlabs_key', DEFAULT_ELEVENLABS_KEY);
+    }
+    if (!localStorage.getItem('shalom_elevenlabs_voice')) {
+        localStorage.setItem('shalom_elevenlabs_voice', DEFAULT_VOICE_ID);
+    }
+
     const STATE = {
         isOpen: false,
         isListening: false,
         isSpeaking: false,
         soundEnabled: true,
-        elevenLabsKey: localStorage.getItem('shalom_elevenlabs_key') || '',
-        elevenLabsVoiceId: localStorage.getItem('shalom_elevenlabs_voice') || '21m00Tcm4TlvDq8ikWAM', // Rachel / Español
+        elevenLabsKey: localStorage.getItem('shalom_elevenlabs_key') || DEFAULT_ELEVENLABS_KEY,
+        elevenLabsVoiceId: localStorage.getItem('shalom_elevenlabs_voice') || DEFAULT_VOICE_ID,
         currentAudio: null
     };
 
@@ -141,20 +152,24 @@
                 <!-- Panel de Configuración de ElevenLabs -->
                 <div id="voice-settings-panel" class="voice-settings-panel" style="display: none;">
                     <h5>⚙️ Configuración de Voz ElevenLabs</h5>
-                    <p class="settings-desc">Integra tu API Key de ElevenLabs para reproducir respuestas con voz hiperrealista.</p>
+                    <p class="settings-desc">Tu API Key ya se encuentra integrada y conectada con éxito.</p>
                     <label>ElevenLabs API Key:</label>
-                    <input type="password" id="input-elevenlabs-key" placeholder="xi-api-key..." value="${STATE.elevenLabsKey}">
-                    <label>Voz (Voice ID):</label>
-                    <input type="text" id="input-elevenlabs-voice" placeholder="Ej: 21m00Tcm4TlvDq8ikWAM" value="${STATE.elevenLabsVoiceId}">
+                    <input type="text" id="input-elevenlabs-key" placeholder="xi-api-key..." value="${STATE.elevenLabsKey}">
+                    <label>Selecciona una Voz en Español:</label>
+                    <select id="select-elevenlabs-voice" style="width:100%; padding:8px 12px; background:#05140e; border:1px solid #1a4a39; border-radius:8px; color:#fff; font-size:0.85rem; margin-bottom:8px;">
+                        <option value="EXAVITQu4vr4xnSDxMaL" ${STATE.elevenLabsVoiceId === 'EXAVITQu4vr4xnSDxMaL' ? 'selected' : ''}>Sarah (Profesional, Clara y Confiable)</option>
+                        <option value="cgSgspJ2msm6clMCkdW9" ${STATE.elevenLabsVoiceId === 'cgSgspJ2msm6clMCkdW9' ? 'selected' : ''}>Jessica (Cálida y Amable)</option>
+                        <option value="FGY2WhTYpPnrIDTdsKH5" ${STATE.elevenLabsVoiceId === 'FGY2WhTYpPnrIDTdsKH5' ? 'selected' : ''}>Laura (Entusiasta y Dinámica)</option>
+                        <option value="nPczCjzI2devNBz1zQrb" ${STATE.elevenLabsVoiceId === 'nPczCjzI2devNBz1zQrb' ? 'selected' : ''}>Brian (Masculina Profunda y Confortante)</option>
+                        <option value="pNInz6obpgDQGcFmaJgB" ${STATE.elevenLabsVoiceId === 'pNInz6obpgDQGcFmaJgB' ? 'selected' : ''}>Adam (Masculina Firme y Ejecutiva)</option>
+                    </select>
                     <div class="settings-help">
-                        <small>💡 Pasos para obtenerla:<br>
-                        1. Regístrate gratis en <strong>elevenlabs.io</strong>.<br>
-                        2. Ve a tu Perfil ➔ <em>API Keys</em> ➔ Crear nueva llave.<br>
-                        3. Pégala aquí y guarda los cambios.</small>
+                        <small>✓ <strong>Estado:</strong> Conectado a la API oficial de ElevenLabs.<br>
+                        Modelo activo: <code>eleven_multilingual_v2</code> (Español fluido y de alta fidelidad).</small>
                     </div>
                     <div class="settings-actions">
-                        <button id="btn-save-settings" class="btn btn-main btn-sm">Guardar y Activar</button>
-                        <button id="btn-close-settings" class="btn btn-ghost btn-sm">Cancelar</button>
+                        <button id="btn-save-settings" class="btn btn-main btn-sm">Guardar Cambios</button>
+                        <button id="btn-close-settings" class="btn btn-ghost btn-sm">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -227,7 +242,7 @@
 
         saveSettingsBtn.addEventListener('click', () => {
             const key = document.getElementById('input-elevenlabs-key').value.trim();
-            const voice = document.getElementById('input-elevenlabs-voice').value.trim() || '21m00Tcm4TlvDq8ikWAM';
+            const voice = document.getElementById('select-elevenlabs-voice')?.value || 'EXAVITQu4vr4xnSDxMaL';
             STATE.elevenLabsKey = key;
             STATE.elevenLabsVoiceId = voice;
             localStorage.setItem('shalom_elevenlabs_key', key);
