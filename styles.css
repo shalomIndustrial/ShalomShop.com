@@ -791,29 +791,460 @@ h2 {
     color: #cfe0d8
 }
 
-form {
+/* ========================================================
+   Cotizador Interactivo Multi-Producto y Cantidades
+   ======================================================== */
+
+.quote-form-layout {
     display: grid;
-    gap: 14px;
-    margin-top: 28px;
-    max-width: 560px
+    grid-template-columns: 1.18fr 0.82fr;
+    gap: 36px;
+    align-items: start;
+    max-width: 1100px;
+    margin-top: 36px;
 }
 
-input,
-select,
-textarea {
-    width: 100%;
-    padding: 14px 16px;
-    border-radius: 12px;
-    border: 1px solid #2f5f4f;
-    background: #0f3d30;
+@media (max-width: 960px) {
+    .quote-form-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+}
+
+.quote-products-block,
+.quote-contact-block {
+    background: rgba(8, 38, 29, 0.75);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+}
+
+.quote-block-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--naranja), #ff8a00);
     color: #fff;
-    font: inherit;
-    font-size: 16px; /* Previene zoom automático en iOS Safari */
+    font-weight: 800;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(240, 138, 36, 0.4);
 }
 
-input::placeholder,
-textarea::placeholder {
-    color: #9fc0b2
+.quote-block-header h3 {
+    margin: 0 0 4px 0;
+    font-size: 1.22rem;
+    color: #fff;
+}
+
+.quote-block-subtitle {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #9cb5aa;
+    line-height: 1.45;
+}
+
+/* Lista de Productos a Cotizar */
+.quote-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.quote-product-row {
+    background: #09261d;
+    border: 1.5px solid rgba(255, 255, 255, 0.09);
+    border-radius: 14px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: all 0.22s ease;
+}
+
+.quote-product-row:hover {
+    border-color: rgba(232, 212, 77, 0.35);
+    background: #0c3025;
+}
+
+.quote-product-row.is-selected {
+    border-color: var(--limon);
+    background: linear-gradient(145deg, #0d3429, #09271e);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(232, 212, 77, 0.2);
+}
+
+.quote-product-row.has-pulse {
+    animation: quoteRowPulse 1.2s ease-out;
+}
+
+@keyframes quoteRowPulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 rgba(232, 212, 77, 0.8); }
+    50% { transform: scale(1.02); box-shadow: 0 0 24px rgba(232, 212, 77, 0.9); }
+    100% { transform: scale(1); }
+}
+
+.quote-check-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    cursor: pointer;
+    user-select: none;
+    width: 100%;
+}
+
+.quote-prod-checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.quote-custom-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid #3c7260;
+    background: #061e16;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: all 0.18s ease;
+}
+
+.quote-prod-checkbox:checked + .quote-custom-check {
+    background: var(--limon);
+    border-color: var(--limon);
+}
+
+.quote-prod-checkbox:checked + .quote-custom-check::after {
+    content: "✓";
+    color: #0b2b20;
+    font-weight: 900;
+    font-size: 0.95rem;
+    line-height: 1;
+}
+
+.quote-prod-info {
+    flex-grow: 1;
+}
+
+.quote-prod-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+}
+
+.quote-prod-title strong {
+    font-size: 1.02rem;
+    color: #fff;
+}
+
+.quote-tag-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: rgba(240, 138, 36, 0.18);
+    border: 1px solid rgba(240, 138, 36, 0.35);
+    color: #f7a858;
+}
+
+.quote-prod-meta {
+    font-size: 0.88rem;
+    color: #9cb5aa;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.quote-unit-price {
+    font-weight: 800;
+    color: var(--limon);
+    font-size: 1.05rem;
+}
+
+.quote-unit-name {
+    color: #8dafa1;
+    font-size: 0.8rem;
+}
+
+/* Control de Cantidad y Subtotal por Item */
+.quote-qty-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    transition: opacity 0.2s ease;
+    flex-wrap: wrap;
+}
+
+.quote-qty-control.is-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.qty-label {
+    font-size: 0.82rem;
+    color: #9cb5aa;
+    font-weight: 600;
+}
+
+.qty-stepper {
+    display: inline-flex;
+    align-items: center;
+    background: #051912;
+    border: 1px solid #1c4a3b;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.btn-qty {
+    background: transparent;
+    border: none;
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    font-size: 1.25rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+    user-select: none;
+}
+
+.btn-qty:hover:not(:disabled) {
+    background: rgba(232, 212, 77, 0.25);
+    color: var(--limon);
+}
+
+.btn-qty:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.qty-input {
+    width: 48px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    color: #fff;
+    text-align: center;
+    font-weight: 800;
+    font-size: 0.98rem;
+    padding: 0;
+    outline: none;
+    -moz-appearance: textfield;
+}
+
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.quote-item-subtotal {
+    font-size: 0.84rem;
+    color: #9cb5aa;
+}
+
+.item-subtotal-val {
+    color: #fff;
+    font-weight: 700;
+}
+
+/* Resumen Financiero en Vivo */
+.quote-live-summary {
+    background: linear-gradient(145deg, rgba(15, 61, 48, 0.85), rgba(9, 36, 28, 0.98));
+    border: 1px solid rgba(232, 212, 77, 0.3);
+    border-radius: 16px;
+    padding: 20px 22px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+}
+
+.summary-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    flex-wrap: wrap;
+}
+
+.summary-count {
+    font-weight: 700;
+    color: #fff;
+    font-size: 0.92rem;
+}
+
+.summary-tag {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--limon);
+    background: rgba(232, 212, 77, 0.12);
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(232, 212, 77, 0.25);
+}
+
+.summary-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.summary-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.92rem;
+    color: #b6cec4;
+}
+
+.summary-line strong {
+    color: #fff;
+}
+
+.summary-iva-line {
+    font-size: 0.86rem;
+    color: #8dafa1;
+}
+
+.summary-total-line {
+    padding-top: 10px;
+    margin-top: 6px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.15);
+    font-size: 1.05rem;
+}
+
+.summary-total-val {
+    font-size: 1.45rem;
+    font-weight: 900;
+    color: var(--limon);
+}
+
+.summary-alert {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(240, 138, 36, 0.14);
+    border: 1px solid rgba(240, 138, 36, 0.35);
+    border-radius: 10px;
+    color: #f7b46d;
+    font-size: 0.82rem;
+    line-height: 1.4;
+}
+
+/* Campos de Contacto en Bloque 2 */
+.contact-fields-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field-group label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #cfe0d8;
+}
+
+.field-group input,
+.field-group textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border-radius: 12px;
+    border: 1px solid #285444;
+    background: #09261d;
+    color: #fff;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: inherit;
+}
+
+.field-group input:focus,
+.field-group textarea:focus {
+    border-color: var(--limon);
+    box-shadow: 0 0 0 3px rgba(232, 212, 77, 0.2);
+    background: #0c3025;
+}
+
+.field-group input::placeholder,
+.field-group textarea::placeholder {
+    color: #7d9e91;
+}
+
+.btn-submit-quote {
+    width: 100%;
+    padding: 16px 24px;
+    font-size: 1.02rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(240, 138, 36, 0.35);
+    transition: all 0.2s ease;
+}
+
+.btn-submit-quote:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(240, 138, 36, 0.5);
+}
+
+.quote-feedback-items {
+    margin: 14px 0 16px;
+    padding: 12px 14px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    font-size: 0.85rem;
+    color: #fff;
+    border-left: 3px solid #25d366;
+}
+
+.quote-feedback-items ul {
+    margin: 6px 0 0 18px;
+    padding: 0;
+}
+
+.quote-feedback-items li {
+    margin-bottom: 4px;
 }
 
 footer {

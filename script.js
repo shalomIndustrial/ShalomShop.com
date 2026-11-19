@@ -211,40 +211,252 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // ----------------------------------------------------
-    // 3.1 Manejo de Envío del Formulario de Contacto
+    // 3.1 Cotizador Interactivo Multi-Producto y Cantidades
     // ----------------------------------------------------
+    const quoteContainer = document.getElementById('quote-items-container');
+    const summaryCount = document.getElementById('summary-items-count');
+    const summarySubtotal = document.getElementById('summary-subtotal');
+    const summaryIva = document.getElementById('summary-iva');
+    const summaryTotal = document.getElementById('summary-total');
+    const summaryAlert = document.getElementById('summary-alert');
     const formulario = document.getElementById('form-contacto');
     const feedbackBox = document.getElementById('contacto-feedback');
 
+    function formatMoney(amount) {
+        return '$' + amount.toLocaleString('es-MX', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' MXN';
+    }
+
+    function updateQuoteCalculation() {
+        if (!quoteContainer) return { items: [], subtotal: 0, iva: 0, total: 0, totalUnits: 0 };
+
+        const rows = quoteContainer.querySelectorAll('.quote-product-row');
+        let subtotal = 0;
+        let totalUnits = 0;
+        const selectedItems = [];
+
+        rows.forEach(row => {
+            const checkbox = row.querySelector('.quote-prod-checkbox');
+            const qtyControl = row.querySelector('.quote-qty-control');
+            const qtyInput = row.querySelector('.qty-input');
+            const btnMinus = row.querySelector('.btn-qty-minus');
+            const btnPlus = row.querySelector('.btn-qty-plus');
+            const subtotalEl = row.querySelector('.item-subtotal-val');
+            const price = parseFloat(row.getAttribute('data-price')) || 0;
+            const name = row.getAttribute('data-name') || 'Producto';
+            const unit = row.getAttribute('data-unit') || 'unidad';
+
+            if (checkbox && checkbox.checked) {
+                row.classList.add('is-selected');
+                if (qtyControl) qtyControl.classList.remove('is-disabled');
+                if (qtyInput) qtyInput.disabled = false;
+                if (btnMinus) btnMinus.disabled = false;
+                if (btnPlus) btnPlus.disabled = false;
+
+                let qty = parseInt(qtyInput ? qtyInput.value : 1, 10);
+                if (isNaN(qty) || qty < 1) qty = 1;
+                if (qtyInput) qtyInput.value = qty;
+
+                const itemSubtotal = price * qty;
+                subtotal += itemSubtotal;
+                totalUnits += qty;
+
+                if (subtotalEl) subtotalEl.textContent = formatMoney(itemSubtotal);
+
+                selectedItems.push({
+                    id: row.getAttribute('data-id'),
+                    name: name,
+                    unit: unit,
+                    price: price,
+                    qty: qty,
+                    subtotal: itemSubtotal
+                });
+            } else {
+                row.classList.remove('is-selected');
+                if (qtyControl) qtyControl.classList.add('is-disabled');
+                if (qtyInput) qtyInput.disabled = true;
+                if (btnMinus) btnMinus.disabled = true;
+                if (btnPlus) btnPlus.disabled = true;
+                if (subtotalEl) subtotalEl.textContent = '$0 MXN';
+            }
+        });
+
+        const iva = subtotal * 0.16;
+        const total = subtotal + iva;
+
+        // Actualizar UI del Resumen
+        if (summaryCount) {
+            if (selectedItems.length === 0) {
+                summaryCount.textContent = '0 productos seleccionados (0 unidades)';
+            } else {
+                summaryCount.textContent = `${selectedItems.length} producto${selectedItems.length > 1 ? 's' : ''} seleccionado${selectedItems.length > 1 ? 's' : ''} (${totalUnits} unidad${totalUnits > 1 ? 'es' : ''} en total)`;
+            }
+        }
+
+        if (summarySubtotal) summarySubtotal.textContent = formatMoney(subtotal);
+        if (summaryIva) summaryIva.textContent = formatMoney(iva);
+        if (summaryTotal) summaryTotal.textContent = formatMoney(total);
+
+        if (summaryAlert) {
+            if (selectedItems.length === 0) {
+                summaryAlert.style.display = 'block';
+                summaryAlert.innerHTML = '💡 Marca uno o más productos arriba para calcular tu cotización.';
+                summaryAlert.style.background = 'rgba(240, 138, 36, 0.14)';
+                summaryAlert.style.borderColor = 'rgba(240, 138, 36, 0.35)';
+                summaryAlert.style.color = '#f7b46d';
+            } else {
+                summaryAlert.style.display = 'block';
+                summaryAlert.innerHTML = `✓ <strong>${selectedItems.length} producto(s) listo(s)</strong> para cotización. Precios antes de IVA (16%).`;
+                summaryAlert.style.background = 'rgba(37, 211, 102, 0.12)';
+                summaryAlert.style.borderColor = 'rgba(37, 211, 102, 0.35)';
+                summaryAlert.style.color = '#7eedaa';
+            }
+        }
+
+        return { items: selectedItems, subtotal, iva, total, totalUnits };
+    }
+
+    if (quoteContainer) {
+        // Delegación de eventos para los steppers y checkboxes de productos
+        quoteContainer.addEventListener('change', (e) => {
+            if (e.target.classList.contains('quote-prod-checkbox')) {
+                updateQuoteCalculation();
+            } else if (e.target.classList.contains('qty-input')) {
+                let val = parseInt(e.target.value, 10);
+                if (isNaN(val) || val < 1) val = 1;
+                if (val > 999) val = 999;
+                e.target.value = val;
+                updateQuoteCalculation();
+            }
+        });
+
+        quoteContainer.addEventListener('click', (e) => {
+            const btnMinus = e.target.closest('.btn-qty-minus');
+            const btnPlus = e.target.closest('.btn-qty-plus');
+
+            if (btnMinus) {
+                const row = btnMinus.closest('.quote-product-row');
+                const qtyInput = row?.querySelector('.qty-input');
+                if (qtyInput && !qtyInput.disabled) {
+                    let val = parseInt(qtyInput.value, 10) || 1;
+                    if (val > 1) {
+                        qtyInput.value = val - 1;
+                        updateQuoteCalculation();
+                    }
+                }
+            } else if (btnPlus) {
+                const row = btnPlus.closest('.quote-product-row');
+                const qtyInput = row?.querySelector('.qty-input');
+                if (qtyInput && !qtyInput.disabled) {
+                    let val = parseInt(qtyInput.value, 10) || 1;
+                    if (val < 999) {
+                        qtyInput.value = val + 1;
+                        updateQuoteCalculation();
+                    }
+                }
+            }
+        });
+
+        // Inicializar cálculo en carga (por defecto vacío)
+        updateQuoteCalculation();
+    }
+
+    // Botones "Cotizar producto →" del catálogo superior
+    const catalogQuoteBtns = document.querySelectorAll('[data-quote-select]');
+    catalogQuoteBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const targetProdId = btn.getAttribute('data-quote-select');
+            if (!targetProdId) return;
+
+            const targetRow = document.querySelector(`.quote-product-row[data-id="${targetProdId}"]`);
+            if (targetRow) {
+                const checkbox = targetRow.querySelector('.quote-prod-checkbox');
+                const qtyInput = targetRow.querySelector('.qty-input');
+
+                if (checkbox) {
+                    checkbox.checked = true;
+                    if (qtyInput && (!qtyInput.value || parseInt(qtyInput.value, 10) < 1)) {
+                        qtyInput.value = 1;
+                    }
+                    updateQuoteCalculation();
+
+                    // Resaltar fila con pulso
+                    targetRow.classList.remove('has-pulse');
+                    void targetRow.offsetWidth; // Force reflow
+                    targetRow.classList.add('has-pulse');
+                }
+            }
+        });
+    });
+
+    // Envío del Formulario de Cotización Multi-Producto
     if (formulario) {
         formulario.addEventListener('submit', function (evento) {
             evento.preventDefault();
-            
+
+            const quoteData = updateQuoteCalculation();
             const nombre = document.getElementById('contacto-nombre')?.value.trim();
             const email = document.getElementById('contacto-email')?.value.trim();
             const telefono = document.getElementById('contacto-telefono')?.value.trim();
-            const interes = document.getElementById('contacto-interes')?.value;
             const mensaje = document.getElementById('contacto-mensaje')?.value.trim();
             const boton = document.getElementById('btn-enviar-cotizacion');
 
-            if (!nombre || !email || !telefono || !interes) {
-                alert('Por favor completa todos los campos requeridos.');
+            // Validar que haya al menos 1 producto seleccionado
+            if (quoteData.items.length === 0) {
+                alert('Por favor selecciona al menos un producto a cotizar en el Paso 1 marcando la casilla correspondiente.');
+                const firstRow = document.querySelector('.quote-product-row');
+                if (firstRow) {
+                    firstRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstRow.classList.add('has-pulse');
+                }
                 return;
             }
 
-            // Guardar en la base de datos local ShalomDB
-            const savedLead = window.ShalomDB.saveLead({
+            if (!nombre || !email || !telefono) {
+                alert('Por favor completa tus datos de contacto requeridos en el Paso 2.');
+                return;
+            }
+
+            // Crear resumen de productos para interes
+            const itemsSummary = quoteData.items
+                .map(it => `${it.qty}x ${it.name}`)
+                .join(', ');
+
+            // Detalle para mensaje guardado en la base de datos
+            const financialDetails = `Subtotal: ${formatMoney(quoteData.subtotal)} | IVA (+16%): ${formatMoney(quoteData.iva)} | Total Estimado: ${formatMoney(quoteData.total)}`;
+            const fullMessage = (mensaje ? `Notas del cliente: ${mensaje}\n\n` : '') + `[Cotización Solicitada]:\n` + 
+                quoteData.items.map(it => `• ${it.qty}x ${it.name} (${it.unit}) = ${formatMoney(it.subtotal)}`).join('\n') + 
+                `\n${financialDetails}`;
+
+            // Guardar en ShalomDB
+            window.ShalomDB.saveLead({
                 nombre: nombre,
                 email: email,
                 telefono: telefono,
-                interes: interes,
-                mensaje: mensaje || 'Sin notas adicionales',
-                origen: 'Formulario Web'
+                interes: itemsSummary,
+                mensaje: fullMessage,
+                origen: 'Formulario Web (Cotizador Múltiple)'
             });
 
-            // Retroalimentación visual interactiva
+            // Preparar mensaje para WhatsApp directo con desglose completo
+            let waText = `Hola ShalomIndustrial, soy *${nombre}*.\nSolicito cotización formal para el siguiente pedido:\n\n`;
+            quoteData.items.forEach(it => {
+                waText += `📦 *${it.qty}x ${it.name}* (${it.unit}) = ${formatMoney(it.subtotal)}\n`;
+            });
+            waText += `\n💵 *Subtotal:* ${formatMoney(quoteData.subtotal)}\n`;
+            waText += `📋 *IVA (+16%):* ${formatMoney(quoteData.iva)}\n`;
+            waText += `💰 *Total Estimado:* ${formatMoney(quoteData.total)}\n\n`;
+            waText += `👤 *Contacto:* ${nombre}\n`;
+            waText += `📞 *Tel:* ${telefono}\n`;
+            waText += `✉️ *Email:* ${email}\n`;
+            if (mensaje) {
+                waText += `📍 *Destino / Notas:* ${mensaje}\n`;
+            }
+
+            const waUrl = `https://wa.me/522299783526?text=${encodeURIComponent(waText)}`;
+
+            // Retroalimentación visual
             if (boton) {
-                boton.textContent = '✓ ¡Solicitud Registrada!';
+                boton.innerHTML = '<span>✓ ¡Cotización Registrada con Éxito!</span>';
                 boton.disabled = true;
                 boton.style.background = '#25d366';
                 boton.style.borderColor = '#25d366';
@@ -254,29 +466,46 @@ document.addEventListener('DOMContentLoaded', () => {
             if (feedbackBox) {
                 feedbackBox.innerHTML = `
                     <div class="feedback-card">
-                        <h4>¡Gracias por tu interés, ${nombre}!</h4>
-                        <p>Hemos guardado tu solicitud en nuestra base de datos. Un asesor técnico comercial revisará tu requerimiento de <strong>${interes}</strong> y te contactará al teléfono <strong>${telefono}</strong>.</p>
+                        <h4>¡Excelente, ${nombre}! Tu cotización ha sido calculada y registrada.</h4>
+                        <p>Hemos guardado tu solicitud en nuestra base de datos. Un asesor técnico comercial revisará tu pedido para coordinar logística y tiempos de entrega.</p>
+                        
+                        <div class="quote-feedback-items">
+                            <strong>Resumen de tu cotización:</strong>
+                            <ul>
+                                ${quoteData.items.map(it => `<li><strong>${it.qty}x ${it.name}</strong> (${it.unit}): ${formatMoney(it.subtotal)}</li>`).join('')}
+                            </ul>
+                            <div style="margin-top:8px; padding-top:6px; border-top:1px dashed rgba(255,255,255,0.2); font-weight:700;">
+                                Total Estimado con IVA: <span style="color:#25d366; font-size:1.1rem;">${formatMoney(quoteData.total)}</span>
+                            </div>
+                        </div>
+
                         <div class="feedback-actions">
-                            <a href="https://wa.me/522299783526?text=Hola%2C%20acabo%20de%20enviar%20mi%20solicitud%20en%20la%20web%20para%20${encodeURIComponent(interes)}.%20Mi%20nombre%20es%20${encodeURIComponent(nombre)}." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm">
-                                Agilizar atención por WhatsApp ahora →
+                            <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm" style="display:inline-flex; align-items:center; gap:8px;">
+                                <span>📲 Enviar desglose por WhatsApp directo ahora →</span>
                             </a>
                         </div>
                     </div>
                 `;
                 feedbackBox.style.display = 'block';
+                feedbackBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
 
-            // Limpiar formulario y restaurar botón tras 5 segundos
+            // Restaurar botón tras 6 segundos
             setTimeout(() => {
-                formulario.reset();
                 if (boton) {
-                    boton.textContent = 'Enviar otra solicitud';
+                    boton.innerHTML = `
+                        <span>Solicitar otra cotización</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    `;
                     boton.disabled = false;
                     boton.style.background = '';
                     boton.style.borderColor = '';
                     boton.style.color = '';
                 }
-            }, 5000);
+            }, 6000);
         });
     }
 

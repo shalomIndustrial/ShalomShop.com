@@ -147,7 +147,7 @@
                                 <li>Grado alimenticio de exportación</li>
                                 <li>Excelente secado uniforme</li>
                             </ul>
-                            <a href="#contacto" class="btn btn-card">Cotizar producto →</a>
+                            <a href="#contacto" class="btn btn-card" data-quote-select="carnauba">Cotizar producto →</a>
                         </div>
                     </div>
 
@@ -174,7 +174,7 @@
                                 <li>Protección contra pérdida de agua</li>
                                 <li>Óptimo rendimiento en empaque</li>
                             </ul>
-                            <a href="#contacto" class="btn btn-card">Cotizar producto →</a>
+                            <a href="#contacto" class="btn btn-card" data-quote-select="cera-normal">Cotizar producto →</a>
                         </div>
                     </div>
 
@@ -201,7 +201,7 @@
                                 <li>No deja residuos nocivos</li>
                                 <li>Presentación porrón de 20 Litros</li>
                             </ul>
-                            <a href="#contacto" class="btn btn-card">Cotizar producto →</a>
+                            <a href="#contacto" class="btn btn-card" data-quote-select="saniclean-20">Cotizar producto →</a>
                         </div>
                     </div>
 
@@ -229,7 +229,7 @@
                                 <li>Facilita la adherencia de la cera</li>
                                 <li>Presentación porrón de 20 Litros</li>
                             </ul>
-                            <a href="#contacto" class="btn btn-card">Cotizar producto →</a>
+                            <a href="#contacto" class="btn btn-card" data-quote-select="singras-20">Cotizar producto →</a>
                         </div>
                     </div>
 
@@ -257,7 +257,7 @@
                                 <li>Ideal para líneas de alta rotación</li>
                                 <li>Tambor sellado de 200 Litros</li>
                             </ul>
-                            <a href="#contacto" class="btn btn-card">Cotizar producto →</a>
+                            <a href="#contacto" class="btn btn-card" data-quote-select="singras-200">Cotizar producto →</a>
                         </div>
                     </div>
                 </div>
@@ -284,7 +284,7 @@
                 <div>
                     <span class="eyebrow">Exportación</span>
                     <h2>Entregamos donde está tu producción</h2>
-                    <p class="lead">Venta nacional y exportación con logística, documentación y acompañamiento en cada envío. [Describe aquí tus mercados y certificaciones.]</p>
+                    <p class="lead">Venta nacional y exportación con logística, documentación y acompañamiento en cada envío. Cumplimiento con estándares internacionales para cítricos de primera calidad.</p>
                 </div>
                 <div class="stats">
                     <div class="stat"><b>+00</b><span>Años de experiencia</span></div>
@@ -295,28 +295,225 @@
             </div>
         </section>
 
-        <!-- CONTACTO -->
+        <!-- COTIZACIÓN Y CONTACTO -->
         <section id="contacto">
             <div class="wrap">
-                <span class="eyebrow">Contacto</span>
-                <h2>Cuéntanos qué necesitas</h2>
-                <p class="lead">Te respondemos con una propuesta para tu fruta y tu volumen.</p>
-                <form id="form-contacto">
-                    <input type="text" id="contacto-nombre" placeholder="Nombre completo o Empresa" required>
-                    <input type="email" id="contacto-email" placeholder="Correo electrónico corporativo" required>
-                    <input type="tel" id="contacto-telefono" placeholder="Número de teléfono / WhatsApp (ej. 229 123 4567)" required>
-                    <select id="contacto-interes" aria-label="Producto de interés" required>
-                        <option value="" disabled selected>Selecciona el producto a cotizar</option>
-                        <option value="Cera con Carnauba ($9,000)">Cera con Carnauba ($9,000)</option>
-                        <option value="Cera Normal ($5,000)">Cera Normal ($5,000)</option>
-                        <option value="Saniclean 20 lt ($1,350)">Saniclean 20 lt ($1,350)</option>
-                        <option value="Sin Gras 20 lt ($1,350)">Sin Gras 20 lt ($1,350)</option>
-                        <option value="Sin Gras 200 lt ($9,500)">Sin Gras 200 lt ($9,500)</option>
-                        <option value="Pedido múltiple / Varios">Pedido múltiple / Varios productos</option>
-                    </select>
-                    <textarea id="contacto-mensaje" rows="4" placeholder="Volumen aproximado y destino de entrega (opcional)"></textarea>
-                    <button class="btn btn-main" type="submit" id="btn-enviar-cotizacion">Enviar solicitud</button>
-                    <div id="contacto-feedback" class="form-feedback" style="display: none;"></div>
+                <span class="eyebrow">Cotización Personalizada</span>
+                <h2>Arma tu pedido y cotiza al instante</h2>
+                <p class="lead">Selecciona los productos y cantidades que requiere tu empaque. Calculamos tu presupuesto estimado en tiempo real.</p>
+                
+                <form id="form-contacto" class="quote-form-layout">
+                    <!-- PASO 1: Selección Múltiple de Productos y Cantidades -->
+                    <div class="quote-products-block">
+                        <div class="quote-block-header">
+                            <span class="step-num">1</span>
+                            <div>
+                                <h3>Selecciona productos y cantidades</h3>
+                                <p class="quote-block-subtitle">Puedes marcar varias opciones simultáneamente y definir cuántas unidades necesitas de cada una.</p>
+                            </div>
+                        </div>
+
+                        <div class="quote-items-list" id="quote-items-container">
+                            <!-- Producto 1: Cera con Carnauba -->
+                            <div class="quote-product-row" data-id="carnauba" data-price="9000" data-name="Cera con Carnauba" data-unit="Tambor">
+                                <label class="quote-check-label">
+                                    <input type="checkbox" class="quote-prod-checkbox" value="carnauba">
+                                    <span class="quote-custom-check"></span>
+                                    <div class="quote-prod-info">
+                                        <div class="quote-prod-title">
+                                            <strong>Cera con Carnauba</strong>
+                                            <span class="quote-tag-badge">Grado Exportación</span>
+                                        </div>
+                                        <div class="quote-prod-meta">
+                                            <span class="quote-unit-price">$9,000 MXN</span>
+                                            <span class="quote-unit-name">/ Tambor (sin IVA)</span>
+                                        </div>
+                                    </div>
+                                </label>
+                                <div class="quote-qty-control is-disabled">
+                                    <span class="qty-label">Cantidad:</span>
+                                    <div class="qty-stepper">
+                                        <button type="button" class="btn-qty btn-qty-minus" aria-label="Disminuir cantidad" disabled>−</button>
+                                        <input type="number" class="qty-input" value="1" min="1" max="999" disabled>
+                                        <button type="button" class="btn-qty btn-qty-plus" aria-label="Aumentar cantidad" disabled>+</button>
+                                    </div>
+                                    <div class="quote-item-subtotal">Subtotal: <strong class="item-subtotal-val">$0 MXN</strong></div>
+                                </div>
+                            </div>
+
+                            <!-- Producto 2: Cera Normal -->
+                            <div class="quote-product-row" data-id="cera-normal" data-price="5000" data-name="Cera Normal" data-unit="Tambor">
+                                <label class="quote-check-label">
+                                    <input type="checkbox" class="quote-prod-checkbox" value="cera-normal">
+                                    <span class="quote-custom-check"></span>
+                                    <div class="quote-prod-info">
+                                        <div class="quote-prod-title">
+                                            <strong>Cera Normal</strong>
+                                            <span class="quote-tag-badge">Mercado Nacional</span>
+                                        </div>
+                                        <div class="quote-prod-meta">
+                                            <span class="quote-unit-price">$5,000 MXN</span>
+                                            <span class="quote-unit-name">/ Tambor (sin IVA)</span>
+                                        </div>
+                                    </div>
+                                </label>
+                                <div class="quote-qty-control is-disabled">
+                                    <span class="qty-label">Cantidad:</span>
+                                    <div class="qty-stepper">
+                                        <button type="button" class="btn-qty btn-qty-minus" aria-label="Disminuir cantidad" disabled>−</button>
+                                        <input type="number" class="qty-input" value="1" min="1" max="999" disabled>
+                                        <button type="button" class="btn-qty btn-qty-plus" aria-label="Aumentar cantidad" disabled>+</button>
+                                    </div>
+                                    <div class="quote-item-subtotal">Subtotal: <strong class="item-subtotal-val">$0 MXN</strong></div>
+                                </div>
+                            </div>
+
+                            <!-- Producto 3: Saniclean 20 lt -->
+                            <div class="quote-product-row" data-id="saniclean-20" data-price="1350" data-name="Saniclean 20 lt" data-unit="Porrón 20L">
+                                <label class="quote-check-label">
+                                    <input type="checkbox" class="quote-prod-checkbox" value="saniclean-20">
+                                    <span class="quote-custom-check"></span>
+                                    <div class="quote-prod-info">
+                                        <div class="quote-prod-title">
+                                            <strong>Saniclean 20 lt</strong>
+                                            <span class="quote-tag-badge">Sanitizante</span>
+                                        </div>
+                                        <div class="quote-prod-meta">
+                                            <span class="quote-unit-price">$1,350 MXN</span>
+                                            <span class="quote-unit-name">/ Porrón 20L (sin IVA)</span>
+                                        </div>
+                                    </div>
+                                </label>
+                                <div class="quote-qty-control is-disabled">
+                                    <span class="qty-label">Cantidad:</span>
+                                    <div class="qty-stepper">
+                                        <button type="button" class="btn-qty btn-qty-minus" aria-label="Disminuir cantidad" disabled>−</button>
+                                        <input type="number" class="qty-input" value="1" min="1" max="999" disabled>
+                                        <button type="button" class="btn-qty btn-qty-plus" aria-label="Aumentar cantidad" disabled>+</button>
+                                    </div>
+                                    <div class="quote-item-subtotal">Subtotal: <strong class="item-subtotal-val">$0 MXN</strong></div>
+                                </div>
+                            </div>
+
+                            <!-- Producto 4: Sin Gras 20 lt -->
+                            <div class="quote-product-row" data-id="singras-20" data-price="1350" data-name="Sin Gras 20 lt" data-unit="Porrón 20L">
+                                <label class="quote-check-label">
+                                    <input type="checkbox" class="quote-prod-checkbox" value="singras-20">
+                                    <span class="quote-custom-check"></span>
+                                    <div class="quote-prod-info">
+                                        <div class="quote-prod-title">
+                                            <strong>Sin Gras 20 lt</strong>
+                                            <span class="quote-tag-badge">Desengrasante</span>
+                                        </div>
+                                        <div class="quote-prod-meta">
+                                            <span class="quote-unit-price">$1,350 MXN</span>
+                                            <span class="quote-unit-name">/ Porrón 20L (sin IVA)</span>
+                                        </div>
+                                    </div>
+                                </label>
+                                <div class="quote-qty-control is-disabled">
+                                    <span class="qty-label">Cantidad:</span>
+                                    <div class="qty-stepper">
+                                        <button type="button" class="btn-qty btn-qty-minus" aria-label="Disminuir cantidad" disabled>−</button>
+                                        <input type="number" class="qty-input" value="1" min="1" max="999" disabled>
+                                        <button type="button" class="btn-qty btn-qty-plus" aria-label="Aumentar cantidad" disabled>+</button>
+                                    </div>
+                                    <div class="quote-item-subtotal">Subtotal: <strong class="item-subtotal-val">$0 MXN</strong></div>
+                                </div>
+                            </div>
+
+                            <!-- Producto 5: Sin Gras 200 lt -->
+                            <div class="quote-product-row" data-id="singras-200" data-price="9500" data-name="Sin Gras 200 lt" data-unit="Tambor 200L">
+                                <label class="quote-check-label">
+                                    <input type="checkbox" class="quote-prod-checkbox" value="singras-200">
+                                    <span class="quote-custom-check"></span>
+                                    <div class="quote-prod-info">
+                                        <div class="quote-prod-title">
+                                            <strong>Sin Gras 200 lt</strong>
+                                            <span class="quote-tag-badge">Industrial a Granel</span>
+                                        </div>
+                                        <div class="quote-prod-meta">
+                                            <span class="quote-unit-price">$9,500 MXN</span>
+                                            <span class="quote-unit-name">/ Tambor 200L (sin IVA)</span>
+                                        </div>
+                                    </div>
+                                </label>
+                                <div class="quote-qty-control is-disabled">
+                                    <span class="qty-label">Cantidad:</span>
+                                    <div class="qty-stepper">
+                                        <button type="button" class="btn-qty btn-qty-minus" aria-label="Disminuir cantidad" disabled>−</button>
+                                        <input type="number" class="qty-input" value="1" min="1" max="999" disabled>
+                                        <button type="button" class="btn-qty btn-qty-plus" aria-label="Aumentar cantidad" disabled>+</button>
+                                    </div>
+                                    <div class="quote-item-subtotal">Subtotal: <strong class="item-subtotal-val">$0 MXN</strong></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Resumen Financiero en Vivo -->
+                        <div class="quote-live-summary" id="quote-live-summary">
+                            <div class="summary-top-bar">
+                                <div class="summary-count" id="summary-items-count">0 productos seleccionados (0 unidades)</div>
+                                <span class="summary-tag">Presupuesto en Tiempo Real</span>
+                            </div>
+                            <div class="summary-breakdown">
+                                <div class="summary-line">
+                                    <span>Subtotal estimado:</span>
+                                    <strong id="summary-subtotal">$0 MXN</strong>
+                                </div>
+                                <div class="summary-line summary-iva-line">
+                                    <span>IVA estimado (+16%):</span>
+                                    <span id="summary-iva">$0 MXN</span>
+                                </div>
+                                <div class="summary-line summary-total-line">
+                                    <span>Total Estimado con IVA:</span>
+                                    <strong id="summary-total" class="summary-total-val">$0 MXN</strong>
+                                </div>
+                            </div>
+                            <div class="summary-alert" id="summary-alert">
+                                💡 Marca uno o más productos arriba para calcular tu cotización.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PASO 2: Datos de Contacto y Envío -->
+                    <div class="quote-contact-block">
+                        <div class="quote-block-header">
+                            <span class="step-num">2</span>
+                            <div>
+                                <h3>Datos de contacto y entrega</h3>
+                                <p class="quote-block-subtitle">Te enviaremos la propuesta formal con tiempos y condiciones preferenciales por volumen.</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-fields-grid">
+                            <div class="field-group">
+                                <label for="contacto-nombre">Nombre o Empresa *</label>
+                                <input type="text" id="contacto-nombre" placeholder="Ej. Empacadora Citrícola del Golfo" required>
+                            </div>
+                            <div class="field-group">
+                                <label for="contacto-email">Correo corporativo *</label>
+                                <input type="email" id="contacto-email" placeholder="correo@empresa.com" required>
+                            </div>
+                            <div class="field-group">
+                                <label for="contacto-telefono">Teléfono / WhatsApp *</label>
+                                <input type="tel" id="contacto-telefono" placeholder="Ej. 229 123 4567" required>
+                            </div>
+                            <div class="field-group full-width">
+                                <label for="contacto-mensaje">Destino de entrega y especificaciones (opcional)</label>
+                                <textarea id="contacto-mensaje" rows="3" placeholder="Indica ciudad o estado de entrega (ej. Martínez de la Torre, Tecomán) o especificaciones de tu empaque..."></textarea>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-main btn-submit-quote" type="submit" id="btn-enviar-cotizacion">
+                            <span>Solicitar Cotización Formal</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                        <div id="contacto-feedback" class="form-feedback" style="display: none;"></div>
+                    </div>
                 </form>
             </div>
         </section>
