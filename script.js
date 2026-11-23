@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Restaurar estado si se redimensiona a pantalla grande
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 860 && primaryNav.classList.contains('is-active')) {
+            if (window.innerWidth > 992 && primaryNav.classList.contains('is-active')) {
                 closeNav();
             }
         });

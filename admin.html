@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <title>Panel de Administración | ShalomIndustrial Leads</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -218,6 +218,7 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
             box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
         }
 
@@ -435,6 +436,155 @@
         .close-modal:hover {
             color: #fff;
         }
+
+        /* Indicador de desplazamiento horizontal en móvil */
+        .table-scroll-hint {
+            display: none;
+            text-align: center;
+            font-size: 0.78rem;
+            color: #8dafa1;
+            padding: 8px 12px;
+            background: rgba(232, 212, 77, 0.08);
+            border: 1px dashed rgba(232, 212, 77, 0.3);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        /* ===== RESPONSIVE PARA TABLETS Y MÓVILES EN PANEL ADMIN ===== */
+        @media (max-width: 992px) {
+            .kpis-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .control-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 16px;
+                padding: 18px;
+            }
+
+            .search-filters {
+                width: 100%;
+            }
+
+            .search-input {
+                flex-grow: 1;
+                min-width: 180px;
+            }
+
+            .admin-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .table-scroll-hint {
+                display: block;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .admin-nav {
+                height: auto;
+                padding: 12px 0;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .admin-badge {
+                font-size: 0.65rem;
+                padding: 2px 7px;
+                margin-left: 6px;
+            }
+
+            .kpis-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .kpi-card {
+                padding: 16px 14px;
+                border-radius: 14px;
+            }
+
+            .kpi-label {
+                font-size: 0.7rem;
+                margin-bottom: 4px;
+            }
+
+            .kpi-val {
+                font-size: 1.65rem;
+            }
+
+            .kpi-sub {
+                display: none;
+            }
+
+            .search-filters {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .search-input,
+            .filter-select {
+                width: 100%;
+                font-size: 16px !important; /* Previene auto-zoom molesto en iOS */
+            }
+
+            .admin-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .admin-actions .btn {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .leads-table th,
+            .leads-table td {
+                padding: 12px 14px;
+                font-size: 0.82rem;
+            }
+
+            .pin-card {
+                padding: 26px 18px;
+                border-radius: 18px;
+            }
+
+            .pin-card h2 {
+                font-size: 1.35rem;
+            }
+
+            .pin-card p {
+                font-size: 0.82rem;
+            }
+
+            .pin-input {
+                font-size: 1.6rem;
+                letter-spacing: 0.2em;
+                padding: 10px;
+            }
+
+            .modal-content {
+                padding: 20px 16px;
+                border-radius: 16px;
+            }
+
+            .modal-content input,
+            .modal-content select,
+            .modal-content textarea {
+                font-size: 16px !important;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .kpis-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
@@ -528,6 +678,7 @@
             </div>
 
             <!-- Tabla de Prospectos -->
+            <div class="table-scroll-hint">👈 Desliza horizontalmente para explorar todas las columnas de la tabla 👉</div>
             <div class="table-responsive">
                 <table class="leads-table">
                     <thead>
