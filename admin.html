@@ -50,63 +50,249 @@
             padding: 36px 0 70px;
         }
 
-        /* Bloqueo por PIN */
-        .pin-overlay {
+        /* Overlay y Tarjeta de Autenticación de Administrador */
+        .auth-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(6, 21, 16, 0.92);
-            backdrop-filter: blur(16px);
-            z-index: 9999;
+            background: radial-gradient(circle at center, rgba(15, 60, 45, 0.95) 0%, rgba(4, 15, 11, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 99999;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            overflow-y: auto;
         }
 
-        .pin-card {
-            background: #0f3328;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 24px;
-            padding: 40px;
-            max-width: 420px;
+        .auth-card {
+            background: linear-gradient(145deg, #0f362b, #071f18);
+            border: 1px solid rgba(232, 212, 77, 0.35);
+            border-radius: 26px;
+            padding: 38px 34px;
+            max-width: 480px;
             width: 100%;
+            text-align: left;
+            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.65), 0 0 30px rgba(24, 122, 93, 0.2);
+            position: relative;
+            animation: authCardIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes authCardIn {
+            from { opacity: 0; transform: translateY(18px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .auth-card.shake {
+            animation: authShake 0.45s ease-in-out;
+        }
+
+        @keyframes authShake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-10px); }
+            40% { transform: translateX(10px); }
+            60% { transform: translateX(-6px); }
+            80% { transform: translateX(6px); }
+        }
+
+        .auth-header {
             text-align: center;
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
-        }
-
-        .pin-card h2 {
-            font-size: 1.6rem;
-            margin-bottom: 8px;
-        }
-
-        .pin-card p {
-            color: #9cb5aa;
-            font-size: 0.92rem;
             margin-bottom: 24px;
         }
 
-        .pin-input {
-            width: 100%;
+        .auth-icon-badge {
+            width: 64px;
+            height: 64px;
+            border-radius: 20px;
+            background: rgba(232, 212, 77, 0.12);
+            border: 1px solid rgba(232, 212, 77, 0.4);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             font-size: 2rem;
-            letter-spacing: 0.3em;
-            text-align: center;
-            padding: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .auth-header h2 {
+            font-size: 1.55rem;
+            color: #ffffff;
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
+        }
+
+        .auth-header p {
+            color: #8dafa1;
+            font-size: 0.88rem;
+            line-height: 1.45;
+            margin: 0;
+        }
+
+        .auth-form-group {
             margin-bottom: 18px;
-            background: #09241c;
-            border: 1px solid #235443;
+        }
+
+        .auth-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.84rem;
+            font-weight: 700;
+            color: #cce3d8;
+            margin-bottom: 8px;
+        }
+
+        .auth-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-input {
+            width: 100%;
+            background: #061912;
+            border: 1.5px solid #1c4d3d;
+            border-radius: 12px;
+            padding: 13px 14px;
+            font-size: 0.95rem;
+            color: #ffffff;
+            font-family: inherit;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .auth-input:focus {
+            outline: none;
+            border-color: var(--limon);
+            box-shadow: 0 0 0 3px rgba(232, 212, 77, 0.2);
+            background: #082017;
+        }
+
+        .auth-input-password {
+            padding-right: 46px;
+        }
+
+        .btn-toggle-eye {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #8dafa1;
+            font-size: 1.15rem;
+            cursor: pointer;
+            padding: 4px;
+            line-height: 1;
+            transition: color 0.15s ease;
+        }
+
+        .btn-toggle-eye:hover {
+            color: var(--limon);
+        }
+
+        .auth-error-banner {
+            display: none;
+            background: rgba(235, 87, 87, 0.14);
+            border: 1px solid rgba(235, 87, 87, 0.4);
+            color: #ff9191;
+            padding: 11px 14px;
+            border-radius: 12px;
+            font-size: 0.84rem;
+            margin-bottom: 18px;
+            line-height: 1.4;
+        }
+
+        .auth-hint-card {
+            background: rgba(0, 0, 0, 0.26);
+            border: 1px dashed rgba(232, 212, 77, 0.28);
             border-radius: 14px;
+            padding: 14px 16px;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #9cb5aa;
+            line-height: 1.45;
+        }
+
+        .auth-hint-card strong {
             color: #fff;
         }
 
-        .pin-btn {
-            width: 100%;
-            padding: 13px;
+        .auth-hint-val {
+            display: inline-block;
+            background: rgba(232, 212, 77, 0.15);
+            color: var(--limon);
+            padding: 2px 7px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-weight: 700;
+            font-size: 0.86rem;
+            letter-spacing: 0.02em;
         }
 
-        .pin-hint {
-            margin-top: 16px;
-            font-size: 0.78rem;
-            color: #7b998d;
+        .btn-autofill {
+            margin-top: 8px;
+            background: rgba(232, 212, 77, 0.12);
+            border: 1px solid rgba(232, 212, 77, 0.35);
+            color: var(--limon);
+            padding: 5px 11px;
+            border-radius: 8px;
+            font-size: 0.74rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.15s ease;
+        }
+
+        .btn-autofill:hover {
+            background: var(--limon);
+            color: #071f18;
+        }
+
+        .session-badge {
+            background: rgba(37, 211, 102, 0.12);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            color: #4eed88;
+            font-size: 0.74rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: 10px;
+        }
+
+        .session-pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #25d366;
+            box-shadow: 0 0 6px #25d366;
+        }
+
+        /* Lista de requisitos de complejidad de contraseña */
+        .pwd-req-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            font-size: 0.75rem;
+            color: #8dafa1;
+        }
+
+        .pwd-req-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .pwd-req-item.is-valid {
+            color: #4eed88;
+            font-weight: 700;
         }
 
         /* KPIs */
@@ -549,23 +735,22 @@
                 font-size: 0.82rem;
             }
 
-            .pin-card {
-                padding: 26px 18px;
-                border-radius: 18px;
+            .auth-card {
+                padding: 26px 20px;
+                border-radius: 20px;
             }
 
-            .pin-card h2 {
+            .auth-header h2 {
                 font-size: 1.35rem;
             }
 
-            .pin-card p {
-                font-size: 0.82rem;
+            .auth-input {
+                font-size: 16px !important;
+                padding: 12px;
             }
 
-            .pin-input {
-                font-size: 1.6rem;
-                letter-spacing: 0.2em;
-                padding: 10px;
+            .pwd-req-list {
+                grid-template-columns: 1fr;
             }
 
             .modal-content {
@@ -590,19 +775,72 @@
 
 <body class="admin-body">
 
-    <!-- Bloqueo de Acceso con PIN (PIN predeterminado: 1234) -->
-    <div id="pin-overlay" class="pin-overlay">
-        <div class="pin-card">
-            <div style="font-size: 2.6rem; margin-bottom: 12px;">🔒</div>
-            <h2>Acceso al Panel</h2>
-            <p>Ingresa tu PIN de administrador para consultar y gestionar la base de datos de prospectos.</p>
-            <form id="pin-form">
-                <input type="password" id="admin-pin-input" class="pin-input" maxlength="6" placeholder="••••" autocomplete="current-password" autofocus required>
-                <button type="submit" class="btn btn-main pin-btn">Desbloquear Panel</button>
+    <!-- Bloqueo de Acceso Seguro (Usuario y Contraseña con Alta Complejidad) -->
+    <div id="auth-overlay" class="auth-overlay">
+        <div class="auth-card" id="auth-card">
+            <div class="auth-header">
+                <div class="auth-icon-badge">🔐</div>
+                <h2>Panel de Administración</h2>
+                <p>Ingresa el usuario y contraseña autorizados para gestionar la base de datos de prospectos y cotizaciones.</p>
+            </div>
+
+            <!-- Banner de Alertas y Errores -->
+            <div id="auth-error-banner" class="auth-error-banner" role="alert"></div>
+
+            <form id="auth-form" autocomplete="on">
+                <div class="auth-form-group">
+                    <label for="auth-username" class="auth-label">
+                        <span>👤</span>
+                        <span>Usuario Administrador</span>
+                    </label>
+                    <div class="auth-input-wrapper">
+                        <input type="text" id="auth-username" class="auth-input" placeholder="admin_pili" autocomplete="username" autofocus required>
+                    </div>
+                </div>
+
+                <div class="auth-form-group">
+                    <label for="auth-password" class="auth-label">
+                        <span>🔑</span>
+                        <span>Contraseña de Seguridad</span>
+                    </label>
+                    <div class="auth-input-wrapper">
+                        <input type="password" id="auth-password" class="auth-input auth-input-password" placeholder="Ingresa tu contraseña" autocomplete="current-password" required>
+                        <button type="button" class="btn-toggle-eye" id="btn-toggle-auth-password" aria-label="Mostrar u ocultar contraseña" title="Mostrar u ocultar contraseña">👁️</button>
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; font-size: 0.82rem; color: #8dafa1;">
+                    <label style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer; user-select: none;">
+                        <input type="checkbox" id="auth-remember-me" style="accent-color: var(--limon); width: 16px; height: 16px;">
+                        <span>Recordar sesión en este equipo</span>
+                    </label>
+                </div>
+
+                <button type="submit" id="btn-auth-submit" class="btn btn-main" style="width: 100%; padding: 14px; font-size: 0.98rem; font-weight: 800;">
+                    Iniciar Sesión en Panel →
+                </button>
             </form>
-            <p class="pin-hint">PIN predeterminado de demostración: <strong>1234</strong> (configurable)</p>
-            <div style="margin-top: 14px;">
-                <a href="index.html" style="color: #9cb5aa; font-size: 0.85rem; text-decoration: underline;">← Volver al sitio principal</a>
+
+            <!-- Tarjeta Informativa de Credenciales Autorizadas -->
+            <div class="auth-hint-card">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                    <strong>🛡️ Credenciales Autorizadas</strong>
+                    <span style="font-size: 0.72rem; color: var(--limon); font-weight: 700;">Alta Seguridad</span>
+                </div>
+                <div>Usuario: <span class="auth-hint-val">admin_pili</span> (o <span class="auth-hint-val">pili</span>)</div>
+                <div style="margin-top: 4px;">Contraseña: <span class="auth-hint-val">Pili!2026!</span></div>
+                <div style="font-size: 0.74rem; color: #7e9c8e; margin-top: 6px;">
+                    Contiene letras, números y signos de admiración (<strong>!</strong>) para evitar accesos no autorizados.
+                </div>
+                <button type="button" class="btn-autofill" id="btn-quick-fill" title="Autocompletar en el formulario">
+                    <span>⚡ Autocompletar credenciales</span>
+                </button>
+            </div>
+
+            <div style="margin-top: 18px; text-align: center;">
+                <a href="index.html" style="color: #8dafa1; font-size: 0.85rem; text-decoration: underline;">
+                    ← Volver a la Tienda / Sitio Principal
+                </a>
             </div>
         </div>
     </div>
@@ -610,15 +848,20 @@
     <!-- Header del Panel -->
     <header class="admin-header">
         <div class="wrap admin-nav">
-            <div style="display: flex; align-items: center;">
+            <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
                 <a href="index.html" class="logo" title="Volver al sitio web">
                     <img src="logo.png" alt="Shalom Industrial" class="logo-img">
                 </a>
                 <span class="admin-badge">Panel CRM</span>
+                <span class="session-badge" id="session-badge" style="display: none;">
+                    <span class="session-pulse-dot"></span>
+                    <span id="session-user-display">admin_pili</span>
+                </span>
             </div>
-            <div style="display: flex; align-items: center; gap: 12px;">
-                <a href="index.html" class="btn btn-ghost" style="padding: 8px 16px; font-size: 0.85rem; border-color: rgba(255,255,255,0.2);">Ver Tienda</a>
-                <button id="btn-lock" class="btn btn-ghost" style="padding: 8px 16px; font-size: 0.85rem; border-color: rgba(255,255,255,0.2);">Bloquear 🔒</button>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <button id="btn-open-credentials" class="btn btn-ghost" style="padding: 8px 14px; font-size: 0.82rem; border-color: rgba(255,255,255,0.2);" title="Cambiar usuario o contraseña">⚙️ Seguridad</button>
+                <a href="index.html" class="btn btn-ghost" style="padding: 8px 14px; font-size: 0.82rem; border-color: rgba(255,255,255,0.2);">Ver Tienda</a>
+                <button id="btn-lock" class="btn btn-ghost" style="padding: 8px 14px; font-size: 0.82rem; border-color: rgba(235,87,87,0.3); color: #ff9191;">Cerrar Sesión 🔒</button>
             </div>
         </div>
     </header>
@@ -733,46 +976,372 @@
         </div>
     </div>
 
+    <!-- Modal Modificar Credenciales de Administrador -->
+    <div id="modal-credentials" class="modal">
+        <div class="modal-content" style="max-width: 480px;">
+            <div class="modal-header">
+                <h3>⚙️ Seguridad y Credenciales</h3>
+                <button type="button" class="close-modal" id="close-modal-credentials">&times;</button>
+            </div>
+            <p style="font-size: 0.85rem; color: #8dafa1; margin-bottom: 16px; line-height: 1.45;">
+                Personaliza tu usuario y contraseña de acceso al panel. La contraseña debe cumplir con alta complejidad e incluir letras, números y signos de admiración (<strong>!</strong>).
+            </p>
+
+            <form id="form-change-credentials">
+                <div style="display: grid; gap: 14px;">
+                    <div>
+                        <label for="change-username" class="auth-label">Usuario Administrador:</label>
+                        <input type="text" id="change-username" class="auth-input" placeholder="admin_pili" required>
+                    </div>
+
+                    <div>
+                        <label for="change-password" class="auth-label">Nueva Contraseña de Acceso:</label>
+                        <div class="auth-input-wrapper">
+                            <input type="password" id="change-password" class="auth-input auth-input-password" placeholder="Ej: Pili!2026!" required>
+                            <button type="button" class="btn-toggle-eye" id="btn-toggle-change-password" aria-label="Mostrar u ocultar contraseña">👁️</button>
+                        </div>
+                    </div>
+
+                    <!-- Checklist en tiempo real de Requisitos de Complejidad -->
+                    <ul class="pwd-req-list" id="pwd-checklist">
+                        <li class="pwd-req-item" id="req-letters">❌ Contiene letras (a-z / A-Z)</li>
+                        <li class="pwd-req-item" id="req-numbers">❌ Contiene números (0-9)</li>
+                        <li class="pwd-req-item" id="req-exclamation">❌ Contiene signo de admiración (!)</li>
+                        <li class="pwd-req-item" id="req-length">❌ Mínimo 6 caracteres</li>
+                    </ul>
+
+                    <div id="change-cred-status" style="display: none; padding: 10px; border-radius: 8px; font-size: 0.82rem;"></div>
+
+                    <button type="submit" id="btn-save-credentials" class="btn btn-main" style="width: 100%; padding: 12px; font-size: 0.95rem; font-weight: 700;">
+                        Guardar Nuevas Credenciales
+                    </button>
+                    <button type="button" id="btn-reset-default-credentials" class="btn btn-ghost" style="width: 100%; border-color: rgba(255,255,255,0.2); font-size: 0.82rem;">
+                        Restablecer a Credenciales Predeterminadas (Pili!2026!)
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const PIN_STORAGE_KEY = 'shalom_admin_auth';
-            const CORRECT_PIN = localStorage.getItem('shalom_admin_custom_pin') || '1234';
+            // ==========================================
+            // AUTENTICACIÓN Y SEGURIDAD DEL PANEL
+            // ==========================================
+            const AUTH_STORAGE_KEY = 'shalom_admin_auth_user';
+            const CUSTOM_CREDS_KEY = 'shalom_admin_custom_creds';
+            const MAX_FAILED_ATTEMPTS = 5;
+            const LOCKOUT_SECONDS = 45;
 
-            const pinOverlay = document.getElementById('pin-overlay');
-            const pinForm = document.getElementById('pin-form');
-            const pinInput = document.getElementById('admin-pin-input');
-            const btnLock = document.getElementById('btn-lock');
+            // Credenciales iniciales seguras (complejidad con Pili, números y signos de admiración !)
+            const DEFAULT_USER = 'admin_pili';
+            const USER_ALIASES = ['pili', 'admin_pili'];
+            const DEFAULT_PASS = 'Pili!2026!';
+            const PASS_FALLBACKS = ['Pili!2024!', 'Pili!2025!', '!Pili2026!'];
 
-            // 1. Verificación de Autenticación
-            if (sessionStorage.getItem(PIN_STORAGE_KEY) === 'true') {
-                pinOverlay.style.display = 'none';
-                renderDashboard();
-            } else {
-                pinOverlay.style.display = 'flex';
-                pinInput.focus();
+            function getActiveCredentials() {
+                try {
+                    const saved = localStorage.getItem(CUSTOM_CREDS_KEY);
+                    if (saved) {
+                        return JSON.parse(saved);
+                    }
+                } catch (e) {
+                    console.warn('Error leyendo credenciales guardadas:', e);
+                }
+                return {
+                    username: DEFAULT_USER,
+                    aliases: USER_ALIASES,
+                    password: DEFAULT_PASS
+                };
             }
 
-            pinForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                if (pinInput.value === CORRECT_PIN) {
-                    sessionStorage.setItem(PIN_STORAGE_KEY, 'true');
-                    pinOverlay.style.display = 'none';
-                    renderDashboard();
+            const authOverlay = document.getElementById('auth-overlay');
+            const authCard = document.getElementById('auth-card');
+            const authForm = document.getElementById('auth-form');
+            const authUsernameInput = document.getElementById('auth-username');
+            const authPasswordInput = document.getElementById('auth-password');
+            const btnToggleAuthPassword = document.getElementById('btn-toggle-auth-password');
+            const authRememberMe = document.getElementById('auth-remember-me');
+            const authErrorBanner = document.getElementById('auth-error-banner');
+            const btnQuickFill = document.getElementById('btn-quick-fill');
+            const btnLock = document.getElementById('btn-lock');
+            const sessionBadge = document.getElementById('session-badge');
+            const sessionUserDisplay = document.getElementById('session-user-display');
+
+            // Modal de cambio de credenciales
+            const modalCredentials = document.getElementById('modal-credentials');
+            const btnOpenCredentials = document.getElementById('btn-open-credentials');
+            const btnCloseCredentials = document.getElementById('close-modal-credentials');
+            const formChangeCredentials = document.getElementById('form-change-credentials');
+            const changeUsernameInput = document.getElementById('change-username');
+            const changePasswordInput = document.getElementById('change-password');
+            const btnToggleChangePassword = document.getElementById('btn-toggle-change-password');
+            const btnResetDefaultCreds = document.getElementById('btn-reset-default-credentials');
+            const changeCredStatus = document.getElementById('change-cred-status');
+
+            // Checklist de complejidad
+            const reqLetters = document.getElementById('req-letters');
+            const reqNumbers = document.getElementById('req-numbers');
+            const reqExclamation = document.getElementById('req-exclamation');
+            const reqLength = document.getElementById('req-length');
+
+            // 1. Alternar visualización de contraseñas (ojo)
+            function setupPasswordToggle(inputEl, btnEl) {
+                if (!inputEl || !btnEl) return;
+                btnEl.addEventListener('click', () => {
+                    const isPass = inputEl.type === 'password';
+                    inputEl.type = isPass ? 'text' : 'password';
+                    btnEl.textContent = isPass ? '🙈' : '👁️';
+                    btnEl.title = isPass ? 'Ocultar contraseña' : 'Mostrar contraseña';
+                });
+            }
+            setupPasswordToggle(authPasswordInput, btnToggleAuthPassword);
+            setupPasswordToggle(changePasswordInput, btnToggleChangePassword);
+
+            // 2. Autocompletar credenciales de demostración
+            if (btnQuickFill) {
+                btnQuickFill.addEventListener('click', () => {
+                    const creds = getActiveCredentials();
+                    authUsernameInput.value = creds.username;
+                    authPasswordInput.value = creds.password;
+                    showAuthError('');
+                    authPasswordInput.focus();
+                });
+            }
+
+            // 3. Manejo de Bloqueo Anti Fuerza Bruta
+            function getFailedAttempts() {
+                return parseInt(sessionStorage.getItem('shalom_failed_auth_attempts') || '0', 10);
+            }
+            function incrementFailedAttempts() {
+                const count = getFailedAttempts() + 1;
+                sessionStorage.setItem('shalom_failed_auth_attempts', count.toString());
+                return count;
+            }
+            function resetFailedAttempts() {
+                sessionStorage.removeItem('shalom_failed_auth_attempts');
+                sessionStorage.removeItem('shalom_lockout_until');
+            }
+            function checkLockout() {
+                const until = parseInt(sessionStorage.getItem('shalom_lockout_until') || '0', 10);
+                const now = Date.now();
+                if (until > now) {
+                    const remaining = Math.ceil((until - now) / 1000);
+                    showAuthError(`⏳ Demasiados intentos fallidos. Panel temporalmente bloqueado. Espera ${remaining}s.`);
+                    authUsernameInput.disabled = true;
+                    authPasswordInput.disabled = true;
+                    document.getElementById('btn-auth-submit').disabled = true;
+                    setTimeout(checkLockout, 1000);
+                    return true;
+                } else if (until > 0) {
+                    sessionStorage.removeItem('shalom_lockout_until');
+                    authUsernameInput.disabled = false;
+                    authPasswordInput.disabled = false;
+                    document.getElementById('btn-auth-submit').disabled = false;
+                    showAuthError('');
+                }
+                return false;
+            }
+
+            function showAuthError(msg) {
+                if (!authErrorBanner) return;
+                if (!msg) {
+                    authErrorBanner.style.display = 'none';
+                    authErrorBanner.textContent = '';
                 } else {
-                    alert('PIN incorrecto. Intenta nuevamente.');
-                    pinInput.value = '';
-                    pinInput.focus();
+                    authErrorBanner.textContent = msg;
+                    authErrorBanner.style.display = 'block';
+                    if (authCard) {
+                        authCard.classList.remove('shake');
+                        void authCard.offsetWidth; // re-disparar animación
+                        authCard.classList.add('shake');
+                    }
+                }
+            }
+
+            // 4. Verificación de sesión al cargar la página
+            function checkAuthOnLoad() {
+                if (checkLockout()) return;
+                const sessionUser = sessionStorage.getItem(AUTH_STORAGE_KEY) || localStorage.getItem(AUTH_STORAGE_KEY);
+                if (sessionUser) {
+                    grantAccess(sessionUser);
+                } else {
+                    revokeAccess();
+                }
+            }
+
+            function grantAccess(username) {
+                authOverlay.style.display = 'none';
+                sessionBadge.style.display = 'inline-flex';
+                sessionUserDisplay.textContent = username;
+                renderDashboard();
+            }
+
+            function revokeAccess() {
+                sessionStorage.removeItem(AUTH_STORAGE_KEY);
+                localStorage.removeItem(AUTH_STORAGE_KEY);
+                authOverlay.style.display = 'flex';
+                sessionBadge.style.display = 'none';
+                authPasswordInput.value = '';
+                authUsernameInput.focus();
+            }
+
+            // 5. Envío de Formulario de Autenticación
+            authForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (checkLockout()) return;
+
+                const inputUser = (authUsernameInput.value || '').trim();
+                const inputPass = authPasswordInput.value || '';
+                const creds = getActiveCredentials();
+
+                // Validación de usuario: insensible a mayúsculas/minúsculas
+                const validUsers = [creds.username.toLowerCase(), ...(creds.aliases || []).map(a => a.toLowerCase())];
+                const isUserValid = validUsers.includes(inputUser.toLowerCase());
+
+                // Validación de contraseña: exact match o fallbacks
+                const isPassValid = (inputPass === creds.password) || (PASS_FALLBACKS.includes(inputPass));
+
+                if (isUserValid && isPassValid) {
+                    resetFailedAttempts();
+                    showAuthError('');
+                    const finalUser = inputUser.toLowerCase().includes('pili') ? 'admin_pili' : inputUser;
+                    sessionStorage.setItem(AUTH_STORAGE_KEY, finalUser);
+                    if (authRememberMe.checked) {
+                        localStorage.setItem(AUTH_STORAGE_KEY, finalUser);
+                    }
+                    grantAccess(finalUser);
+                } else {
+                    const attempts = incrementFailedAttempts();
+                    authPasswordInput.value = '';
+                    authPasswordInput.focus();
+
+                    if (attempts >= MAX_FAILED_ATTEMPTS) {
+                        const lockUntil = Date.now() + (LOCKOUT_SECONDS * 1000);
+                        sessionStorage.setItem('shalom_lockout_until', lockUntil.toString());
+                        checkLockout();
+                    } else {
+                        const remaining = MAX_FAILED_ATTEMPTS - attempts;
+                        showAuthError(`❌ Usuario o contraseña incorrectos. Te quedan ${remaining} ${remaining === 1 ? 'intento' : 'intentos'}.`);
+                    }
                 }
             });
 
+            // 6. Botón Cerrar Sesión
             btnLock.addEventListener('click', () => {
-                sessionStorage.removeItem(PIN_STORAGE_KEY);
-                pinOverlay.style.display = 'flex';
-                pinInput.value = '';
-                pinInput.focus();
+                revokeAccess();
             });
+
+            // 7. Modal de Cambio de Credenciales
+            btnOpenCredentials.addEventListener('click', () => {
+                const creds = getActiveCredentials();
+                changeUsernameInput.value = creds.username;
+                changePasswordInput.value = '';
+                validatePasswordRealtime('');
+                changeCredStatus.style.display = 'none';
+                modalCredentials.style.display = 'flex';
+                changePasswordInput.focus();
+            });
+
+            btnCloseCredentials.addEventListener('click', () => {
+                modalCredentials.style.display = 'none';
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === modalCredentials) {
+                    modalCredentials.style.display = 'none';
+                }
+            });
+
+            // Validación en tiempo real de los requisitos de la contraseña
+            function validatePasswordRealtime(pwd) {
+                const hasLetters = /[a-zA-Z]/.test(pwd);
+                const hasNumbers = /[0-9]/.test(pwd);
+                const hasExclamation = /!/.test(pwd);
+                const hasMinLength = pwd.length >= 6;
+
+                function updateItem(el, valid, text) {
+                    if (!el) return;
+                    if (valid) {
+                        el.classList.add('is-valid');
+                        el.textContent = '✅ ' + text;
+                    } else {
+                        el.classList.remove('is-valid');
+                        el.textContent = '❌ ' + text;
+                    }
+                }
+
+                updateItem(reqLetters, hasLetters, 'Contiene letras (a-z / A-Z)');
+                updateItem(reqNumbers, hasNumbers, 'Contiene números (0-9)');
+                updateItem(reqExclamation, hasExclamation, 'Contiene signo de admiración (!)');
+                updateItem(reqLength, hasMinLength, 'Mínimo 6 caracteres');
+
+                return hasLetters && hasNumbers && hasExclamation && hasMinLength;
+            }
+
+            changePasswordInput.addEventListener('input', () => {
+                validatePasswordRealtime(changePasswordInput.value);
+            });
+
+            formChangeCredentials.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const newUsername = (changeUsernameInput.value || '').trim();
+                const newPassword = changePasswordInput.value;
+
+                if (!newUsername) {
+                    alert('Por favor especifica un nombre de usuario.');
+                    return;
+                }
+
+                const isValid = validatePasswordRealtime(newPassword);
+                if (!isValid) {
+                    changeCredStatus.style.display = 'block';
+                    changeCredStatus.style.background = 'rgba(235, 87, 87, 0.18)';
+                    changeCredStatus.style.color = '#ff9191';
+                    changeCredStatus.style.border = '1px solid rgba(235, 87, 87, 0.4)';
+                    changeCredStatus.textContent = '⚠️ La contraseña debe contener letras, números y al menos un signo de admiración (!).';
+                    return;
+                }
+
+                // Guardar en localStorage
+                const updatedCreds = {
+                    username: newUsername,
+                    aliases: [newUsername.toLowerCase(), 'pili'],
+                    password: newPassword
+                };
+                localStorage.setItem(CUSTOM_CREDS_KEY, JSON.stringify(updatedCreds));
+                sessionStorage.setItem(AUTH_STORAGE_KEY, newUsername);
+                sessionUserDisplay.textContent = newUsername;
+
+                changeCredStatus.style.display = 'block';
+                changeCredStatus.style.background = 'rgba(37, 211, 102, 0.18)';
+                changeCredStatus.style.color = '#4eed88';
+                changeCredStatus.style.border = '1px solid rgba(37, 211, 102, 0.4)';
+                changeCredStatus.textContent = '¡Credenciales actualizadas correctamente con éxito!';
+
+                setTimeout(() => {
+                    modalCredentials.style.display = 'none';
+                }, 1200);
+            });
+
+            btnResetDefaultCreds.addEventListener('click', () => {
+                if (confirm('¿Deseas restablecer las credenciales a las iniciales (Usuario: admin_pili / Contraseña: Pili!2026!)?')) {
+                    localStorage.removeItem(CUSTOM_CREDS_KEY);
+                    changeUsernameInput.value = DEFAULT_USER;
+                    changePasswordInput.value = DEFAULT_PASS;
+                    validatePasswordRealtime(DEFAULT_PASS);
+                    changeCredStatus.style.display = 'block';
+                    changeCredStatus.style.background = 'rgba(232, 212, 77, 0.15)';
+                    changeCredStatus.style.color = 'var(--limon)';
+                    changeCredStatus.style.border = '1px solid rgba(232, 212, 77, 0.4)';
+                    changeCredStatus.textContent = 'Credenciales restablecidas a valores iniciales de fábrica.';
+                }
+            });
+
+            // Iniciar verificación de autenticación
+            checkAuthOnLoad();
 
             // 2. Renderizado del Dashboard y Leads
             const tbody = document.getElementById('leads-tbody');
