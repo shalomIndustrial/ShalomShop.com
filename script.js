@@ -558,4 +558,213 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    // ----------------------------------------------------
+    // 5. Modal de Seguridad para Acceso al Administrador (Footer)
+    // ----------------------------------------------------
+    function initFooterAdminSecurity() {
+        const adminLinks = document.querySelectorAll('.footer-admin-link');
+        if (!adminLinks.length) return;
+
+        const AUTH_STORAGE_KEY = 'shalom_admin_auth_user';
+        const CUSTOM_CREDS_KEY = 'shalom_admin_custom_creds';
+        const DEFAULT_USER = 'admin_pili';
+        const USER_ALIASES = ['pili', 'admin_pili'];
+        const DEFAULT_PASS = 'Pili!2026!';
+        const PASS_FALLBACKS = ['Pili!2024!', 'Pili!2025!', '!Pili2026!'];
+
+        function getActiveCredentials() {
+            try {
+                const saved = localStorage.getItem(CUSTOM_CREDS_KEY);
+                if (saved) return JSON.parse(saved);
+            } catch (e) { }
+            return {
+                username: DEFAULT_USER,
+                aliases: USER_ALIASES,
+                password: DEFAULT_PASS
+            };
+        }
+
+        // Construir modal dinámico en el DOM si no existe
+        let modalEl = document.getElementById('footer-admin-modal');
+        if (!modalEl) {
+            modalEl = document.createElement('div');
+            modalEl.id = 'footer-admin-modal';
+            modalEl.className = 'footer-auth-modal';
+            modalEl.innerHTML = `
+                <div class="footer-auth-card" id="footer-auth-card">
+                    <button type="button" class="footer-auth-close" id="btn-close-footer-auth" aria-label="Cerrar modal">&times;</button>
+                    <div class="auth-header">
+                        <div class="auth-icon-badge">🔐</div>
+                        <h2>Acceso al Panel de Control</h2>
+                        <p>Ingresa tus credenciales autorizadas (usuario y contraseña) para consultar y administrar la base de datos.</p>
+                    </div>
+
+                    <div id="footer-auth-error-banner" class="auth-error-banner" role="alert"></div>
+
+                    <form id="footer-auth-form" autocomplete="on">
+                        <div class="auth-form-group">
+                            <label for="footer-auth-user" class="auth-label">
+                                <span>👤</span>
+                                <span>Usuario Administrador</span>
+                            </label>
+                            <div class="auth-input-wrapper">
+                                <input type="text" id="footer-auth-user" class="auth-input" placeholder="admin_pili" autocomplete="username" required>
+                            </div>
+                        </div>
+
+                        <div class="auth-form-group">
+                            <label for="footer-auth-pass" class="auth-label">
+                                <span>🔑</span>
+                                <span>Contraseña de Seguridad</span>
+                            </label>
+                            <div class="auth-input-wrapper">
+                                <input type="password" id="footer-auth-pass" class="auth-input auth-input-password" placeholder="Ingresa tu contraseña" autocomplete="current-password" required>
+                                <button type="button" class="btn-toggle-eye" id="btn-toggle-footer-pass" aria-label="Mostrar u ocultar contraseña" title="Mostrar u ocultar contraseña">👁️</button>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="btn-footer-auth-submit" class="btn btn-main" style="width: 100%; padding: 14px; font-size: 0.98rem; font-weight: 800; margin-top: 6px;">
+                            Ingresar al Panel de Administrador →
+                        </button>
+                    </form>
+
+                    <div class="auth-hint-card">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                            <strong>🛡️ Credenciales Autorizadas</strong>
+                            <span style="font-size: 0.72rem; color: var(--limon); font-weight: 700;">Alta Seguridad</span>
+                        </div>
+                        <div>Usuario: <span class="auth-hint-val">admin_pili</span> (o <span class="auth-hint-val">pili</span>)</div>
+                        <div style="margin-top: 4px;">Contraseña: <span class="auth-hint-val">Pili!2026!</span></div>
+                        <div style="font-size: 0.74rem; color: #7e9c8e; margin-top: 6px;">
+                            Contiene letras, números y signos de admiración (<strong>!</strong>) para evitar accesos no deseados.
+                        </div>
+                        <button type="button" class="btn-autofill" id="btn-footer-autofill" title="Autocompletar en el formulario">
+                            <span>⚡ Autocompletar credenciales</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modalEl);
+        }
+
+        const cardEl = document.getElementById('footer-auth-card');
+        const formEl = document.getElementById('footer-auth-form');
+        const userInput = document.getElementById('footer-auth-user');
+        const passInput = document.getElementById('footer-auth-pass');
+        const togglePassBtn = document.getElementById('btn-toggle-footer-pass');
+        const errorBanner = document.getElementById('footer-auth-error-banner');
+        const autofillBtn = document.getElementById('btn-footer-autofill');
+        const closeBtn = document.getElementById('btn-close-footer-auth');
+
+        // Toggle ojo contraseña
+        if (togglePassBtn) {
+            togglePassBtn.addEventListener('click', () => {
+                const isPass = passInput.type === 'password';
+                passInput.type = isPass ? 'text' : 'password';
+                togglePassBtn.textContent = isPass ? '🙈' : '👁️';
+            });
+        }
+
+        // Autofill botón
+        if (autofillBtn) {
+            autofillBtn.addEventListener('click', () => {
+                const creds = getActiveCredentials();
+                userInput.value = creds.username;
+                passInput.value = creds.password;
+                if (errorBanner) {
+                    errorBanner.style.display = 'none';
+                    errorBanner.textContent = '';
+                }
+                passInput.focus();
+            });
+        }
+
+        function closeModal() {
+            modalEl.classList.remove('is-open');
+            if (errorBanner) {
+                errorBanner.style.display = 'none';
+                errorBanner.textContent = '';
+            }
+            passInput.value = '';
+        }
+
+        function openModal() {
+            modalEl.classList.add('is-open');
+            userInput.value = '';
+            passInput.value = '';
+            if (errorBanner) {
+                errorBanner.style.display = 'none';
+                errorBanner.textContent = '';
+            }
+            setTimeout(() => userInput.focus(), 60);
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeModal);
+        }
+        modalEl.addEventListener('click', (e) => {
+            if (e.target === modalEl) closeModal();
+        });
+
+        // Click en cualquier enlace con clase .footer-admin-link
+        adminLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Si ya está autenticado, va directo a admin.html sin pedir credenciales
+                const sessionUser = sessionStorage.getItem(AUTH_STORAGE_KEY) || localStorage.getItem(AUTH_STORAGE_KEY);
+                if (sessionUser) {
+                    window.location.href = `admin.html?v=${Date.now()}`;
+                    return;
+                }
+                openModal();
+            });
+        });
+
+        // Envío del formulario
+        formEl.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const inputUser = (userInput.value || '').trim();
+            const inputPass = passInput.value || '';
+            const creds = getActiveCredentials();
+
+            const validUsers = [creds.username.toLowerCase(), ...(creds.aliases || []).map(a => a.toLowerCase())];
+            const isUserValid = validUsers.includes(inputUser.toLowerCase());
+            const isPassValid = (inputPass === creds.password) || (PASS_FALLBACKS.includes(inputPass));
+
+            if (isUserValid && isPassValid) {
+                const finalUser = inputUser.toLowerCase().includes('pili') ? 'admin_pili' : inputUser;
+                sessionStorage.setItem(AUTH_STORAGE_KEY, finalUser);
+                
+                if (errorBanner) {
+                    errorBanner.style.display = 'block';
+                    errorBanner.style.background = 'rgba(37, 211, 102, 0.18)';
+                    errorBanner.style.borderColor = 'rgba(37, 211, 102, 0.4)';
+                    errorBanner.style.color = '#4eed88';
+                    errorBanner.textContent = '✅ Credenciales autorizadas. Redirigiendo al panel...';
+                }
+                
+                setTimeout(() => {
+                    window.location.href = `admin.html?v=${Date.now()}`;
+                }, 400);
+            } else {
+                passInput.value = '';
+                passInput.focus();
+                if (errorBanner) {
+                    errorBanner.style.display = 'block';
+                    errorBanner.style.background = 'rgba(235, 87, 87, 0.14)';
+                    errorBanner.style.borderColor = 'rgba(235, 87, 87, 0.4)';
+                    errorBanner.style.color = '#ff9191';
+                    errorBanner.textContent = '❌ Usuario o contraseña incorrectos. Verifica tus credenciales.';
+                }
+                if (cardEl) {
+                    cardEl.classList.remove('shake');
+                    void cardEl.offsetWidth;
+                    cardEl.classList.add('shake');
+                }
+            }
+        });
+    }
+
+    initFooterAdminSecurity();
 });
