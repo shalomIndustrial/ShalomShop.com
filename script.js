@@ -197,11 +197,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     origen: 'Asistente de Voz'
                 },
                 {
-                    nombre: 'Agrícola Los Piñales',
-                    email: 'compras@lospinales.com',
+                    nombre: 'Empaque Citrícola El Naranjal',
+                    email: 'compras@elnaranjal.mx',
                     telefono: '283 874 9901',
                     interes: 'Saniclean 20 lt ($1,350)',
-                    mensaje: 'Cotización por 15 porrones para desinfección preventiva contra hongos.',
+                    mensaje: 'Cotización por 15 porrones para desinfección preventiva en línea de limón persa de exportación.',
                     estado: 'Cotizado',
                     origen: 'Formulario Web'
                 }

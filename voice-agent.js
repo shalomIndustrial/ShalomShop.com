@@ -132,9 +132,14 @@
             answer: 'Para naranja dulce, el objetivo prioritario es evitar la deshidratación y retrasar la senescencia de la corteza. Nuestra Cera Normal o Cera Carnauba aporta un acabado reluciente que realza el color naranja y sella los poros contra la entrada de Penicillium. En cámaras de conservación, la temperatura óptima recomendada es de 4 a 6 grados Celsius con 90% de humedad relativa.'
         },
         {
-            id: 'toronja_mandarina_tropicales',
-            patterns: ['toronja', 'mandarina', 'pina', 'piña', 'mango', 'pomelo', 'tangerina'],
-            answer: 'En toronja y mandarina, nuestras ceras previenen el colapso celular por manchas de frío y el desprendimiento de cáscara suelta. Para piña MD2 y mango, nuestras formulaciones protegen el pedúnculo contra pudriciones por Thielaviopsis y antracnosis, reteniendo la turgencia y lozanía de la fruta hasta su llegada a los anaqueles internacionales.'
+            id: 'toronja_mandarina',
+            patterns: ['toronja', 'mandarina', 'pomelo', 'tangerina', 'lima'],
+            answer: 'En toronja y mandarina, nuestras ceras especializadas previenen el colapso celular por manchas de frío y el desprendimiento de cáscara suelta, reteniendo la turgencia, firmeza y brillo natural de los cítricos durante tránsitos marítimos o terrestres de exportación.'
+        },
+        {
+            id: 'consulta_pina',
+            patterns: ['pina', 'piña', 'tienen para piña', 'venden cera de piña', 'cuidado de piña'],
+            answer: 'En ShalomIndustrial no manejamos ni comercializamos productos para el cuidado de piña. Nuestra especialidad de más de 20 años está 100% enfocada en cítricos (limón persa, naranja valencia, toronja y mandarina), con presencia exportadora en 3 países.'
         },
         {
             id: 'oleocelosis',
@@ -171,8 +176,13 @@
         // ================= EMPRESA, CONTACTO Y LOGÍSTICA =================
         {
             id: 'empresa_shalom',
-            patterns: ['quienes son', 'que es shalom', 'empresa shalom', 'shalom industrial', 'historia', 'acerca de'],
-            answer: 'ShalomIndustrial es una empresa mexicana líder en formulaciones biotecnológicas y químicas para el tratamiento postcosecha de frutas y cítricos de exportación. Desarrollamos soluciones integrales de desengrase, sanitización y ceras protectoras para maximizar la vida de anaquel, reducir la merma de peso y asegurar la máxima rentabilidad en los empaques agrícolas del país.'
+            patterns: ['quienes son', 'que es shalom', 'empresa shalom', 'shalom industrial', 'historia', 'acerca de', 'experiencia', 'cuantos anos', 'cuantos años'],
+            answer: 'ShalomIndustrial es una empresa mexicana con más de 20 años de experiencia especializada en química postcosecha para cítricos. Desarrollamos ceras protectoras, desinfectantes y desengrasantes que exportamos a 3 países, maximizando la vida de anaquel y garantizando fruta con calidad de exportación.'
+        },
+        {
+            id: 'paises_exportacion',
+            patterns: ['paises', 'exportan', 'a donde exportan', 'exportacion', '3 paises', 'mercados internacionales'],
+            answer: 'En ShalomIndustrial contamos con más de 20 años de trayectoria y son 3 los países a los que se exportan nuestros productos y tratamientos para cítricos, cumpliendo rigurosos estándares fitosanitarios y de inocuidad internacional.'
         },
         {
             id: 'contacto_directo',
@@ -340,7 +350,7 @@
         }
 
         // 5. Respuesta de Respaldo Sofisticada y Consultiva
-        return `En ShalomIndustrial contamos con amplia experiencia técnica en química postcosecha, procesos de empaque y normativas de exportación. Ofrecemos Cera con Carnauba ($9,000), Cera Normal ($5,000), Saniclean 20L ($1,350) y Sin Gras (20L en $1,350 y 200L en $9,500). Puedes consultarme sobre dosis, cultivos específicos, cadena de frío o pedirnos una cotización al WhatsApp 229 978 3526.`;
+        return `En ShalomIndustrial contamos con más de 20 años de experiencia técnica en química postcosecha para cítricos y presencia de exportación en 3 países. Ofrecemos Cera con Carnauba ($9,000), Cera Normal ($5,000), Saniclean 20L ($1,350) y Sin Gras (20L en $1,350 y 200L en $9,500). Puedes consultarme sobre dosis para cítricos, cadena de frío o pedirnos una cotización al WhatsApp 229 978 3526.`;
     }
 
     // ----------------------------------------------------
